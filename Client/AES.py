@@ -10,7 +10,7 @@ def setKey(myKey):
 
 def encrypt(stingtoencrypt,secret):
     try:
-        iv = get_random_bytes(AES.block_size) # we dont use iv, but you see it cuz isla wants to
+        #iv = get_random_bytes(AES.block_size) # we dont use iv, but you see it cuz isla wants to
         key = setKey(secret)
         cipher = AES.new(key.encode(), AES.MODE_CBC,  b'DaddayStalin4200')
         data = cipher.encrypt(pad(stingtoencrypt.encode(), 16))
