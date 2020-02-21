@@ -7,15 +7,13 @@ import sys
 
 
 def main():
-    #port = int(sys.argv[2])
-    #host = str(sys.argv[1])
-    port = 3000
+    port = int(sys.argv[2])
+    host = str(sys.argv[1])
     key = input('key :')
     while(key =='help'):
         help()
         key = input('key :')
     key = key.encode()
-    host = '127.0.0.1'
     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     s.connect((host,port))
     try:
@@ -37,7 +35,6 @@ def main():
                     s.send(passd)
                     respon = s.recv(1024).decode()
                     msg = decrypt(respon,secret)
-                   # cmd = input(':>')
                     while True:
                         cmd = input(':>')
                         try:
@@ -84,7 +81,6 @@ def main():
                             server_resposn = s.recv(1024).decode()
                             server_resposn = decrypt(server_resposn,secret)
                             print(server_resposn)
-                        #cmd = input(':>')
                         
                     
                         
@@ -94,7 +90,7 @@ def main():
             print('server respond with an error')
         
     except:
-        print('serro')
+        print('Could not be able to make connection with the server !')
 def help():
      print ('''
     
