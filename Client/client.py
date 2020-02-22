@@ -7,7 +7,7 @@ import sys
 
 
 def main():
-    port = int(sys.argv[2])
+    port = 2468
     host = str(sys.argv[1])
     key = input('key :')
     while(key =='help'):
