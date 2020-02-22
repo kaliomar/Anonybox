@@ -9,11 +9,7 @@ import sys
 def main():
     port = 2468
     host = str(sys.argv[1])
-    key = input('key :')
-    while(key =='help'):
-        help()
-        key = input('key :')
-    key = key.encode()
+    print("Using {}:{} ".fromat(host,port))
     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     s.connect((host,port))
     try:
