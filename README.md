@@ -27,4 +27,5 @@ For client side:
 
 Creator: Morad Abdelrasheed Mokhtar Ali (Java Developer)<br>
 Mustafa Anwar (Penetration Testing)<br>
-Isla Mukheef (Python Developer UwU)
+Isla Mukheef (Python Developer UwU)<br>
+Khaled Nassar (Flask Framework Developer)
