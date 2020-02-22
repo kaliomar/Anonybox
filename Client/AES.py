@@ -29,4 +29,4 @@ def decrypt(stingtodecrypt,secret):
         return data
 
     except:
-        print('Error while encrypting')
+        print('Error while decrypting')
