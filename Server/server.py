@@ -3,7 +3,6 @@ import socket
 from AES import encrypt, decrypt
 import os
 import shutil
-import sys
 
 
 key = 0
