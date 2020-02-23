@@ -20,8 +20,11 @@ For client side:
 > cd Client && java client
 
 ###  PYTHON3:
- Requirements #### pycrypto,socket,sys,shutil,os
- 
+
+ #### Requirements 
+ ~~~~
+ pycrypto,socket,sys,shutil,os 
+ ~~~~
 > sudo pip3 install pycrypto
 
 ### Running:
