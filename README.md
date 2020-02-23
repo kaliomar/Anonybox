@@ -19,9 +19,21 @@ For server side:
 For client side:
 > cd Client && java client
 
+###  PYTHON3:
+ Requirements #### pycrypto,socket,sys,shutil,os
+ 
+> sudo pip3 install pycrypto
+
+### Running:
+For server side:
+> sudo python3 main.py [HOST] [Night Key]
+
+For client side:
+> sudo python3 client.py [HOST]
+
 ### Encryption info:
 
-*AES-256 CBC PKCS#5 with IV*
+*AES-256 CBC PKCS#5/7 with IV*
 
 ### Copyrights and Team information:
 
