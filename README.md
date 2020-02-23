@@ -19,7 +19,7 @@ For server side:
 For client side:
 > cd Client && java client
 
-###  PYTHON3:
+###  Python 3:
 
  #### Requirements 
  ~~~~
