@@ -1,9 +1,8 @@
 ## Anonybox - AES-256 Encrypted Mailbox
 ### To do:
 
-1. Setup Python Version
-2. Handle Client disconnect in server side
-3. Make GUI for server application
+1. Handle Client disconnect in server side
+2. Make GUI for server application
 
 ### Build:
 For server side:
