@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 public class client {
 	public static void main(String[] args) {
 		try {
+		String ooo = "";
 		String out = "";
 		String ip = JOptionPane.showInputDialog("Server IP:");
 		if (ip.contentEquals("")) {
@@ -26,10 +27,19 @@ public class client {
         while (true) {
         String cmd = JOptionPane.showInputDialog("Enter the command:");
         String encCmd = AES.encrypt(cmd,key);
-        if (encCmd.equals(null)||encCmd.equals("")) {
+        while (encCmd.equals(null)||encCmd.equals("")) {
         	cmd = JOptionPane.showInputDialog("No command entered, Enter the command:");
         }
-        dos.writeUTF(encCmd);
+        String content = AES.encrypt(cmd,key);
+        if (content.length()<=63980) {
+            dos.writeUTF(encCmd);
+            }else {
+            for (int oo = 0;oo<(content.length()/63980)+1;oo++) {
+           	 ooo = content.substring(0,63980);
+           	 content = content.replace(ooo,"");
+           	 dos.writeUTF(AES.encrypt(AES.decrypt(content,key)+"SCPNULCHAR",key));
+            }
+        }
         dos.flush();
         out = AES.decrypt(dis.readUTF(),key);
          while (out.contains("SCPNULCHAR")) {
