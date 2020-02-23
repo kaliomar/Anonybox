@@ -206,7 +206,8 @@ def normal_users(user,ord):
                 return msg
             elif os.path.exists(path):
                 try:
-                    with open('inbox.txt','a') as mail:
+                    mail_path = (path+'/inbox.txt') 
+                    with open(mail_path,'a') as mail:
                         mail.write('\t[!]====================[EMAIL]==================[!]\n{}\nBy : {}\nDATE : 1900/08/16'.format(msg,user)) ## 'TODO': SET THE DATE
                         mesg ='Message has been sent'
                         return mesg
