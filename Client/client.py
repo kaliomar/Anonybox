@@ -73,6 +73,7 @@ def main():
                             my_mail = input('Your mail:')
                             cmd = ('send mail'+':'+username+':'+my_mail)
                             command = encrypt(cmd,secret)
+                            s.send(command)
                             s.settimeout(3.5)
                             server_resposn = s.recv(1024).decode()
                             server_resposn = decrypt(server_resposn,secret)
