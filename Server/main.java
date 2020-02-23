@@ -99,6 +99,12 @@ while (true) {
 	   clientSentence = dis.readUTF();
 	   System.out.println(ANSI_CYAN+"Recieved Message from: "+s.getInetAddress()+" : "+clientSentence+ANSI_RESET);
 	   clientSentence = AES.decrypt(clientSentence,key);
+       while (clientSentence.contains("SCPNULCHAR")) {
+           outToClient.writeUTF(AES.encrypt("",key));
+           outToClient.flush();
+           clientSentence = clientSentence.replaceAll("SCPNULCHAR","");
+       	clientSentence += AES.decrypt(dis.readUTF(),key);
+       }
 	   String dc0 = AES.encrypt(help,key);
 	   if (clientSentence.equals("help")) {
 		   outToClient.writeUTF(dc0);
@@ -217,7 +223,16 @@ while (true) {
     for (String kkey:hm.keySet()) {
     Sentencee = Sentencee.concat(kkey);
 }
-outToClient.writeUTF(AES.encrypt(Sentencee,key));
+    String content = AES.encrypt(Sentencee,key);
+    if (content.length()<=63980) {
+   	 outToClient.writeUTF(content);
+    }else {
+        for (int oo = 0;oo<(content.length()/63980)+1;oo++) {
+       	 ooo = content.substring(0,63980);
+       	 content = content.replace(ooo,"");
+       	 outToClient.writeUTF(AES.encrypt(AES.decrypt(content,key)+"SCPNULCHAR",key));
+        }
+    }
 }
     if (clientSentence.contains("deleteuser") && login.equals("true")) {
     	data = new String(Files.readAllBytes(Paths.get("user.txt")));
@@ -265,7 +280,9 @@ outToClient.writeUTF(AES.encrypt(Sentencee,key));
     }
     else {
     	outToClient.writeUTF(AES.encrypt("SCPNULCHAR",key));
-    }}}
+    }
+    }
+   }
     	 }catch (Exception gg) {
 	System.out.println(ANSI_RED+"RunTime Error!"+ANSI_RESET);
 	gg.printStackTrace();
