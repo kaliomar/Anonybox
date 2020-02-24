@@ -43,3 +43,9 @@ Creator: Morad Abdelrasheed Mokhtar Ali (Java Developer)<br>
 Isla Mukheef (Python Developer UwU) Also, She's the creator of python version !<br>
 Mustafa Anwar (Penetration Testing)<br>
 Khaled Nassar (Flask Framework Developer)
+
+<p align="center">
+  <img width="205" height="210" src="https://i.ya-webdesign.com/images/badge-transparent-communist-1.png">
+ <br>
+  <b>Workers of the world, unite!</b>
+</p>
