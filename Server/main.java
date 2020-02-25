@@ -29,7 +29,7 @@ public class main {
   key = args[0];
      try {
    char[] sm = key.toCharArray();
-   System.out.println(ANSI_CYAN+"Using Key: "+key+ANSI_RESET);
+   System.out.println(ANSI_CYAN+"[Info] Using Key: "+key+ANSI_RESET);
    String help = "";
    String admin = "";
    String data = "";
@@ -44,13 +44,13 @@ public class main {
    data = new String(Files.readAllBytes(Paths.get("user.txt")));
    }catch(Exception e) {
 	   if (stat == 0) {
-		   System.out.println(ANSI_RED+"Help file cannot be accessed. Exiting.."+ANSI_RESET);
+		   System.out.println(ANSI_RED+"[Error] Help file cannot be accessed. Exiting.."+ANSI_RESET);
 		   System.exit(0);
 	   }else if (stat == 1) {
-		   System.out.println(ANSI_RED+"Admin data file cannot be accessed. Exiting.."+ANSI_RESET);
+		   System.out.println(ANSI_RED+"[Error] Admin data file cannot be accessed. Exiting.."+ANSI_RESET);
 		   System.exit(0);
 	   }else if (stat == 2) {
-		   System.out.println(ANSI_RED+"User data file cannot be accessed. Exiting.."+ANSI_RESET);
+		   System.out.println(ANSI_RED+"[Error] User data file cannot be accessed. Exiting.."+ANSI_RESET);
 		   System.exit(0);
 	   }else {
 		   e.printStackTrace();
@@ -58,10 +58,6 @@ public class main {
    }
    String Sentencee = "";
    String response = ""; 
-   PrintWriter writer = null;
-   URL uurl = null;
-   HttpURLConnection uconn = null;
-   BufferedReader urd = null;
    String uline = "";
    String uresult = "";
    String state = ""; 
@@ -72,12 +68,42 @@ public class main {
    String usernm = ""; 
    String line = ""; 
    String keyp = ""; 
+   String dataaa = "";
+   String dc = "";
    String keyu = "";
+   String kk = "";
+   String dc0 = "";
+   String usermail = "";
+   String clientSentence = null;
+   String ppaass = "";
+   String neww = "";
+   String to = "";
+   String message = "";
+   String wew = "";
+   String in = "";
+   String content = "";
+   String deleted = "";
+   String username = "";
+   String new000 = "";
+   BufferedWriter writeer = null;
+   BufferedWriter ewe = null;
+   BufferedReader urd = null;
+   BufferedWriter writerr = null;
+   Date date = null;
+   SimpleDateFormat formatter = null;
+   PrintWriter writer = null;
+   int limit = 0;
+   URL uurl = null;
+   HttpURLConnection uconn = null;
    String[] p = data.split(":");
+   String[] pp = null;
    String[] admindb = admin.split(":");
+   DataOutputStream outToClient = null;
+   DataInputStream dis = null;
    HashMap <String,String> adminhm = new HashMap <String,String>();
    HashMap <String,String> hm = new HashMap <String,String>();
    File fileee = new File("user.txt");
+   File filee = null;
    boolean adminlog = false;
    for (int i = 1,o = 2; i < admindb.length; i += 2) {
 	    adminhm.put(admindb[i - 1], admindb[o - 1]);
@@ -87,25 +113,39 @@ public class main {
     hm.put(p[i - 1], p[o - 1]);
     o += 2;
    }
-   System.out.println(ANSI_GREEN+"All data read. Starting Server.."+ANSI_RESET);
+   System.out.println(ANSI_GREEN+"[Success] All data read. Starting Server.."+ANSI_RESET);
    serverSocket = new ServerSocket(2468,100);
-   System.out.println(ANSI_GREEN+"Started"+ANSI_RESET);
+   System.out.println(ANSI_GREEN+"[Success] Started"+ANSI_RESET);
 while (true) {
    s = serverSocket.accept();
-   DataInputStream dis = new DataInputStream(s.getInputStream());
-   DataOutputStream outToClient = new DataOutputStream(s.getOutputStream());
-   String clientSentence = null;
+   dis = new DataInputStream(s.getInputStream());
+   outToClient = new DataOutputStream(s.getOutputStream());
    while (true) {
+	   try {
 	   clientSentence = dis.readUTF();
-	   System.out.println(ANSI_CYAN+"Recieved Message from: "+s.getInetAddress()+" : "+clientSentence+ANSI_RESET);
+	   }catch (Exception f) {
+		   s = serverSocket.accept();
+		   dis = new DataInputStream(s.getInputStream());
+		   outToClient = new DataOutputStream(s.getOutputStream());
+		   clientSentence = null;
+		   clientSentence = dis.readUTF();
+	   }
+	   System.out.println(ANSI_CYAN+"[Info] Recieved Message from: "+s.getInetAddress()+" : "+clientSentence+ANSI_RESET);
 	   clientSentence = AES.decrypt(clientSentence,key);
        while (clientSentence.contains("SCPNULCHAR")) {
+    	   if (limit==16) {
+    		   limit = 0;
+    		   break;
+    	   }else {
+    		   //DO NOTHING
+    	   }
            outToClient.writeUTF(AES.encrypt("",key));
            outToClient.flush();
            clientSentence = clientSentence.replaceAll("SCPNULCHAR","");
        	clientSentence += AES.decrypt(dis.readUTF(),key);
+       	limit = limit + 1;
        }
-	   String dc0 = AES.encrypt(help,key);
+	   dc0 = AES.encrypt(help,key);
 	   if (clientSentence.equals("help")) {
 		   outToClient.writeUTF(dc0);
 	   }
@@ -114,8 +154,8 @@ while (true) {
      keyu = clientSentence.substring(5);
      keyp = hm.get(keyu);
       response = "USER OK";
-      String dc = AES.encrypt(response,key);
-      String usermail = keyu;
+      dc = AES.encrypt(response,key);
+      usermail = keyu;
       outToClient.writeUTF(dc);
       user = "usertrue";
      }else {
@@ -124,12 +164,12 @@ while (true) {
     	}
     if (clientSentence.contains("pass") && !(state.equals("true"))) {
     	if (user.equals("usertrue")) {
-     String kk = clientSentence.substring(5);
+     kk = clientSentence.substring(5);
      if (kk.equals(keyp)) {
     	 usernm = keyu;
    	  if (Files.exists(Paths.get(keyu+"-mail.txt"))) {
    		response = "PASS OK !,Welcome "+keyu; 
-   		String dc = AES.encrypt(response,key);
+   		dc = AES.encrypt(response,key);
         outToClient.writeUTF(dc);
 	    	}else {
 	    		response = "PASS OK !,Welcome "+keyu+"SUPNULCHAR";
@@ -138,20 +178,20 @@ while (true) {
 	        	response = "No Mailbox Owned ! Created New One !";
 	        	outToClient.writeUTF(AES.encrypt(response,key));
 	    	}
-      String dc = AES.encrypt(response,key);
+      dc = AES.encrypt(response,key);
       outToClient.writeUTF(dc);
       state = "true";
 	  } else {
       response = "PASSWORD IS WRONG";
-      String dc = AES.encrypt(response,key);
+      dc = AES.encrypt(response,key);
       outToClient.writeUTF(dc);
 	}}else{
 		outToClient.writeUTF(AES.encrypt("You didn't enter the username, use user [user]",key));
 	}}
     if (state.equals("true") && clientSentence.equals("mail")) {
     	if (Files.exists(Paths.get(keyu+"-mail.txt"))) {
-    	String dataaa = new String(Files.readAllBytes(Paths.get(keyu+"-mail.txt")));
-    	String dc = AES.encrypt(dataaa,key);
+    	dataaa = new String(Files.readAllBytes(Paths.get(keyu+"-mail.txt")));
+    	dc = AES.encrypt(dataaa,key);
         if (dc.length()<=63980) {
        	 outToClient.writeUTF(dc);
        	 urd.close();
@@ -169,27 +209,27 @@ while (true) {
     	}
     }
     if (state.equals("true") && clientSentence.contains("change password")) {
-    	String ppaass = clientSentence.substring(16);
-    	String neww = data.replace(keyp,ppaass);
+    	ppaass = clientSentence.substring(16);
+    	neww = data.replace(keyp,ppaass);
         fileee.delete();
-        BufferedWriter writeer = new BufferedWriter(new FileWriter("user.txt", true));
+        writeer = new BufferedWriter(new FileWriter("user.txt", true));
         writeer.write(neww);
         writeer.close();
         outToClient.writeUTF(AES.encrypt("The password changed successfully !",key));
     }
     if (state.equals("true") && clientSentence.contains("send mail")) {
-    	String to = clientSentence.substring(13,clientSentence.indexOf("@"));
-    	String message = clientSentence.substring((clientSentence.indexOf("@")+1));
-        BufferedWriter ewe = new BufferedWriter(new FileWriter(to+"-mail.txt", true));
-        String wew = new String(Files.readAllBytes(Paths.get(to+"-mail.txt")));
+    	to = clientSentence.substring(13,clientSentence.indexOf("@"));
+    	message = clientSentence.substring((clientSentence.indexOf("@")+1));
+        ewe = new BufferedWriter(new FileWriter(to+"-mail.txt", true));
+        wew = new String(Files.readAllBytes(Paths.get(to+"-mail.txt")));
         if ((wew.equals(null) || wew.equals("")) == false) {
         	ewe.newLine();
         }else {}
-    	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-    	Date date = new Date();
+    	formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    	date = new Date();
         ewe.append(usernm+" -> "+message+" - "+formatter.format(date));
         ewe.close();
-	    String dc = AES.encrypt("SENDING DONE !",key);
+	    dc = AES.encrypt("SENDING DONE !",key);
         outToClient.writeUTF(dc);
     }
     if (state.equals("true") && (clientSentence.equals("create mail") || clientSentence.equals("reset mail"))) {
@@ -200,12 +240,12 @@ while (true) {
     if (adminhm.containsKey(clientSentence) && !(login.equals("true"))) {
      userm = clientSentence;
 	response = "Admin User OK";
-     String dc = AES.encrypt(response,key);
+     dc = AES.encrypt(response,key);
      outToClient.writeUTF(dc);
     } else if (clientSentence.equals(adminhm.get(userm))) {
      adminlog = true;
      response = "Admin Password OK.Welcome Administrator.";
-	String dc = AES.encrypt(response,key);
+	dc = AES.encrypt(response,key);
      outToClient.writeUTF(dc);
      if (adminlog) {
          login = "true";
@@ -213,9 +253,9 @@ while (true) {
     }
     if (clientSentence.contains("createuser") && login.equals("true")) {
      outToClient.writeUTF(AES.encrypt("DONE !",key));
-     String in = clientSentence.substring(11);
+     in = clientSentence.substring(11);
      writer.write(in);
-     String[] pp = in .split(":");
+     pp = in .split(":");
      hm.put(pp[0], pp[1]);
      writer.close();
     }
@@ -223,7 +263,7 @@ while (true) {
     for (String kkey:hm.keySet()) {
     Sentencee = Sentencee.concat(kkey);
 }
-    String content = AES.encrypt(Sentencee,key);
+    content = AES.encrypt(Sentencee,key);
     if (content.length()<=63980) {
    	 outToClient.writeUTF(content);
     }else {
@@ -236,14 +276,14 @@ while (true) {
 }
     if (clientSentence.contains("deleteuser") && login.equals("true")) {
     	data = new String(Files.readAllBytes(Paths.get("user.txt")));
-    	String deleted = clientSentence.substring(11);
-    	String username = clientSentence.substring(13,clientSentence.indexOf(":"));
-    	String new000 = data.replace(deleted,"");
-    	File filee = new File(username+"-mail.txt");
+    	deleted = clientSentence.substring(11);
+    	username = clientSentence.substring(13,clientSentence.indexOf(":"));
+    	new000 = data.replace(deleted,"");
+    	filee = new File(username+"-mail.txt");
     	filee.delete();
     	fileee.delete();
     	fileee = new File("user.txt");
-    	BufferedWriter writerr = new BufferedWriter(new FileWriter("user.txt", true));
+    	writerr = new BufferedWriter(new FileWriter("user.txt", true));
     	writerr.write(new000);
     	writerr.close();
     	outToClient.writeUTF(AES.encrypt(username+" is deleted !",key));
@@ -265,7 +305,7 @@ while (true) {
          while ((uline = urd.readLine()) != null) {
             uresult += uline;
          }
-         String content = AES.encrypt(uresult,key);
+         content = AES.encrypt(uresult,key);
          if (content.length()<=63980) {
         	 outToClient.writeUTF(content);
         	 urd.close();
