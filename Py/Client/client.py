@@ -27,7 +27,7 @@ def main():
         respon = s.recv(1024).decode()
         if respon == 'OK':
             secret= input('Your secret :')
-            night_secret = encrypt(user,secret)
+            night_secret = encrypt(secret,secret)
             s.send(night_secret)
             respon = s.recv(1024).decode()
             try:
