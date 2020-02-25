@@ -8,10 +8,17 @@ import sys
 
 def main():
     port = 2468
-    host = str(sys.argv[1])
-    print("Using {}:{} ".fromat(host,port))
+    
+    try:
+        host = str(sys.argv[1])
+    except:
+        sys.exit("Sorry No adress defined OwO")
+
+    
+    print("Using {}:{} ".format(host,port))
     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     s.connect((host,port))
+    print("connected")
     try:
         wlc_msg = s.recv(1024).decode()
         print(wlc_msg)
@@ -20,7 +27,7 @@ def main():
         respon = s.recv(1024).decode()
         if respon == 'OK':
             secret= input('Your secret :')
-            night_secret = encrypt(secret,secret)
+            night_secret = encrypt(user,secret)
             s.send(night_secret)
             respon = s.recv(1024).decode()
             try:
