@@ -33,6 +33,12 @@ For server side:
 For client side:
 > sudo python3 client.py [HOST]
 
+ ### Python3 Web Interface
+ ```
+  $ sudo pip3 install flask
+  $ sudo pip3 install flask_wtf
+  $ sudo pip3 install flask_socketio
+  ```
 ### Encryption info:
 
 *AES-256 CBC PKCS#5/7 with IV*
