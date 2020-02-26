@@ -24,7 +24,8 @@ For client side:
  ~~~~
  pycrypto,socket,sys,shutil,os 
  ~~~~
-> sudo pip3 install pycrypto pycryptodome==3.4.3
+> sudo pip3 install pycryptodome
+
 ### Running:
 For server side:
 > sudo python3 main.py [HOST] [Night Key]
