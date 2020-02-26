@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from flask import Flask, render_template, escape, session , redirect, request
 from flask_socketio import SocketIO
 from flask_wtf.csrf import CSRFProtect,CSRFError
