@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="author" content="Knassar702">
+	<meta name="author" content="Anonybox Dev">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Anonybox Login Page</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -42,10 +42,6 @@
 								</div>
 
 								<div class="form-group">
-									<div class="custom-checkbox custom-control">
-										<input type="checkbox" name="remember" id="remember" class="custom-control-input">
-										<label for="remember" class="custom-control-label">Remember Me</label>
-									</div>
 								</div>
 								<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 								<div class="form-group m-0">
@@ -54,13 +50,15 @@
 									</button>
 								</div>
 								<div class="mt-4 text-center">
-									Don't have an account? <a href="register.html">Create One</a>
 								</div>
 							</form>
 						</div>
 					</div>
 					<div class="footer">
-						Copyright &copy; 2017 &mdash; Your Company 
+						<script type="text/javascript">
+							var d = new Date();
+							document.write('Copyright &copy;'+d.getFullYear()+'&mdash; <a href="https://github.com/Praudyogikee-org/Anonybox">AnonyBox</a>');
+						</script>
 					</div>
 				</div>
 			</div>
