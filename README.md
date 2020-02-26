@@ -33,7 +33,7 @@ For server side:
 For client side:
 > sudo python3 client.py [HOST]
 
- ### Python3 Web Interface
+ ### Web Interface Requirements
  ```
   $ sudo pip3 install flask
   $ sudo pip3 install flask_wtf
