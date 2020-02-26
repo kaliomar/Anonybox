@@ -2,7 +2,6 @@ import os
 from .AES import *
 
 def night_sec(user,key,mykey):
-    global Nsec
     path = os.getcwd() +'/'+user+"/night.txt" # if error happen it may be cuz the path was wrong
     try:
         with open(path,'r+') as check:
@@ -11,7 +10,7 @@ def night_sec(user,key,mykey):
             user_night = decrypt(key,hmm).decode() 
             if user_night == hmm :
                 Nsec = hmm
-                return 1
+                return 1 , Nsec
             else:
                 return 2 
             
