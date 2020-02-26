@@ -14,16 +14,8 @@ ANSI_CYAN = "\u001B[36m"
 ANSI_GREEN = "\u001B[32m"
 ANSI_RED = "\u001B[31m"
 ANSI_RESET = "\u001B[0m"
-global Nsec
-global admin_stat
-admin_stat = False
-Nsec = ''
 def main(): 
     print(ANSI_CYAN+"BETA [!]"+ANSI_RESET)
-    global admin_stat
-    global Nsec
-    secure_flag =False 
-    #key = 'godisdead'
     port = 2468
     try:
         host = str(sys.argv[1])
@@ -48,7 +40,7 @@ def main():
                 if len(user) > 0:
                     conn.send(b'OK')
                     night_secret = conn.recv(1024).decode() # ill recive the night secret here
-                    check = night_sec(user,night_secret,key)
+                    check,Nsec = night_sec(user,night_secret,key)
                     if check == 1:
                         secure_flag = True # the user sent a valid night secret to do a secure connection with
                         msg = encrypt('OK',Nsec)
@@ -58,7 +50,7 @@ def main():
                         passd = passd.decode()
                         try:
                             info = user,passd
-                            auth = authentication(info,key)
+                            auth,admin_stat = authentication(info)
                             if admin_stat == True:
                                 print("{} Loged in as Administrator ".format(auth))
                                 msg = ('Welcome Administrator {}'.format(auth))
