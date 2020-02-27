@@ -100,6 +100,8 @@ def login():
 			res.headers['X-Frame-Options'] = 'SAMEORIGIN'
 			res.headers['X-XSS-Protection'] = '1; mode=block'
 			return res
+		else:
+			return redirect('/logout')
 	if session.get('logged_in') == True:
 		res = make_response(sessions())
 		res.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
