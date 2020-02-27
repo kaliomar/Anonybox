@@ -4,14 +4,13 @@
     <title>AnonyBox</title>
   </head>
   <body>
-
+    <hr>
     <h3 style='color: #ccc;font-size: 30px;'>No message yet..</h3>
     <div class="message_holder"></div>
-
     <form action="" method="POST">
       <input type="text" class="username" placeholder="User Name"/>
       <input type="text" class="message" placeholder="Messages"/>
-      <input type="submit"/>
+      <input type="submit" value="Send" />
     </form>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -39,10 +38,9 @@
         console.log( msg )
         if( typeof msg.user_name !== 'undefined' ) {
           $( 'h3' ).remove()
-          $( 'div.message_holder' ).append( '<div><b style="color: #000">'+msg.user_name+'</b> '+msg.message+'</div>' )
+          $( 'div.message_holder' ).append( '<div><b style="color: #000">'+msg.user_name+': </b> '+msg.message+'</div>' )
         }
       })
     </script>
-
   </body>
   </html>
