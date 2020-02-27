@@ -12,9 +12,6 @@ def encrypt(my_word,my_hash=None,hasher=None):
 		return sha256_crypt.verify(my_word, my_hash)
 def random_char(y):
        return ''.join(random.choice(string.ascii_letters) for x in range(y))
-user = 'Anonybox' # username
-passwd = random_char(50)
-print(f'\n\n\n\n Your Password : {passwd}\n\n\n\n')
 optp = OptionParser(add_help_option=False)
 optp.add_option("-h","--help",dest="help",action='store_true')
 optp.add_option("-s","--server",dest='server')
@@ -49,6 +46,9 @@ if opts.uagent:
 	user_agent = opts.uagent
 else:
 	user_agent = None
+passwd = random_char(50)
+print(f'\n\n\n\n Your Password : {passwd}\n\n\n\n')
+
 r"""
 some options:
 
