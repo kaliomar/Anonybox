@@ -4,7 +4,7 @@ from flask_socketio import SocketIO
 from flask_wtf.csrf import CSRFProtect,CSRFError
 from optparse import OptionParser
 from passlib.hash import sha256_crypt
-import secrets,string,random
+import secrets,string,random,time
 def encrypt(my_word,my_hash=None,hasher=None):
 	if hasher:
 		return sha256_crypt.encrypt(my_word)
@@ -47,8 +47,15 @@ if opts.uagent:
 else:
 	user_agent = None
 passwd = random_char(50)
-print(f'\n\n\n\n Your Password : {passwd}\n\n\n\n')
-
+print(r"""
+   _                     ___          
+  /_\  _ _  ___ _ _ _  _| _ ) _____ __
+ / _ \| ' \/ _ \ ' \ || | _ \/ _ \ \ /
+/_/ \_\_||_\___/_||_\_, |___/\___/_\_\
+                    |__/""")
+def info():
+	print(f'Host : {host}\nPort : {port}\nUsername : {user}\nPassword : {passwd}\n\n\n\n')
+info()
 r"""
 some options:
 
@@ -81,7 +88,7 @@ def show_password():
 		r = request.headers.get('User-agent')
 		if r != user_agent:
 			return abort(403)
-	print(f'\n\n\n\n Your Password : {passwd}\n\n\n\n')
+	info()
 	return abort(404)
 @app.route('/',methods=['POST','GET'])
 def login():
@@ -91,6 +98,7 @@ def login():
 			return abort(403)
 	if request.method == 'POST':
 		r = request.form
+		time.sleep(2)
 		if r['username'] == user and passwd == r['password']:
 			session['logged_in'] = True
 			session['user'] = r['username']
