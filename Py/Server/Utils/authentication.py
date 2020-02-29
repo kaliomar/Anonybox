@@ -13,15 +13,13 @@ def authentication(info):
                 flag = 1
                 auth.close()
                 return user , admin_stat
-            else:
-                pass         
+    except:
+        return 0 ,0
+    try:
         user_auth = open('Utils/user.txt','r+')
         users = (auth.read()).split(':')
         while('' in users ):
             users.remove('')
-    except:
-        return 0 ,0
-    try:
         for i in range(0,len(users),2):
             name = users[i]
             passwd = users[1+i]
