@@ -17,7 +17,7 @@ def authentication(info):
         return 0 ,0
     try:
         user_auth = open('Utils/user.txt','r+')
-        users = (auth.read()).split(':')
+        users = (user_auth.read()).split(':')
         while('' in users ):
             users.remove('')
         for i in range(0,len(users),2):
