@@ -1,11 +1,12 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
-
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 public class main {
 	 public static final String ANSI_RESET = "\u001B[0m";
 	 public static final String ANSI_RED = "\u001B[31m";
@@ -25,9 +26,13 @@ public class main {
 	public static void run(String keyy,String userr,String passs) {
 	ServerSocket serverSocket = null;
 	Socket s = null;
-	  try {
-		HashMap <String,String> data = new HashMap <String,String>();
+	int msgCnt = 1;
+	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+	try {
+		Map <String,String> data = new HashMap <String,String>();
 		  String data_dump = "";
+		  String reply = "";
+		  String msg = "";
 		  String clientSentence = "";
 		  String nick = "";
 		  serverSocket = new ServerSocket(1111);
@@ -49,7 +54,7 @@ public class main {
 			   }
 		   clientSentence = AES.decrypt(clientSentence,keyy);
 		   while (clientSentence.contains("SCPNULCHAR")||clientSentence.equals("")) {
-			   if (limit==16) {
+			   if (limit>=16) {
 				   limit = 0;
 				   outToClient.writeUTF(AES.encrypt("Packet limit Reached !",keyy));
 				   break;
@@ -81,15 +86,15 @@ public class main {
 				   outToClient.writeUTF(AES.encrypt("You're already logged in !", keyy));
 			   }
 		   }else if (clientSentence.contains("nick")) {
-			   nick = clientSentence.substring(6);
+			   nick = clientSentence.substring(5);
 			   outToClient.writeUTF(AES.encrypt("Nickname is set !",keyy));
 		   }
 		   else if (clientSentence.equals("show")) {
 			   if (ispassword) {
-			    for (String key : data.keySet()) {
-			        data_dump += key + "->" + data.get(key) + "\n";
+			    for (Map.Entry<String, String> entry : data.entrySet()) {
+			        data_dump += entry.getKey() + "->" + entry.getValue() + "\n";
 			    }
-			    String reply = AES.encrypt(data_dump, keyy);
+			    reply = AES.encrypt(data_dump, keyy);
 			    if (reply.length()<=63980) {
 			   outToClient.writeUTF(reply);
 			    }else {
@@ -102,15 +107,25 @@ public class main {
 			   }else {
 				   outToClient.writeUTF(AES.encrypt("You can't show messages because you're not logged in !",keyy));
 			   }
+			   reply = "";
+			   data_dump = "";
 		   }else if (clientSentence.contains("msg")) {
 			   if (ispassword) {
-			   String msg = clientSentence.substring(5);
-			   msg.replaceAll("msg","");
-			   data.put(nick,msg);
+				   if (!(nick.equals("")||nick.equals(null))) {
+			   msg = clientSentence.substring(4);
+			   msg = msg.replaceAll("msg","");
+			   LocalDateTime now = LocalDateTime.now(); 
+			   msg = msg+" || "+dtf.format(now);
+			   data.put(nick+"|Message no. "+msgCnt,msg);
 			   outToClient.writeUTF(AES.encrypt("Message was sent !",keyy));
+			   msgCnt++;
+				   }else {
+					   outToClient.writeUTF(AES.encrypt("Please add a nickname",keyy));
+				   }
 			   }else {
 				   outToClient.writeUTF(AES.encrypt("You can't write a message because you're not logged in !",keyy));
 			   }
+			   msg = "";
 		   }
 		   else {
 			   outToClient.writeUTF(AES.encrypt("SCPNULCHAR",keyy));
