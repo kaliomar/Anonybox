@@ -1,8 +1,7 @@
 ## Anonybox - AES-256 Encrypted Mailbox
 ### To do:
 
-1. Handle SCPNULCHAR Infinity Error
-2. Make GUI for server application
+1. Make GUI for server application
 
 ### Build:
 For server side:
