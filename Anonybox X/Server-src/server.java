@@ -2,9 +2,7 @@ import java.io.*;
 import java.net.*;
 import java.nio.file.*;
 import java.util.*;
-
 import javax.crypto.BadPaddingException;
-
 import java.time.*;
 public class server {
 	public static String enckey = "";
@@ -85,10 +83,15 @@ public class server {
 				incoming = AES.decrypt(incoming,key);
 				System.out.println("User Sent (Decrypted): "+incoming);
 				if (incoming.equals("ENCERR")) {
+					System.out.println("Entered if");
 					reply = "IEK";
 					o.writeUTF(reply);
 					System.out.println("We sent: "+reply);
-				}
+				}else {
+					yes = true;
+					o.writeUTF("OKOKOK");					
+					}
+					System.out.println("iscorrect");
 				while (true) {
 					try {
 						incoming = i.readUTF();
@@ -110,28 +113,28 @@ public class server {
 						yes = true;
 					}
 				    if (yes) {
-					if (usermap.containsKey(incoming)) {
+					if (usermap.containsKey(incoming)&&yes) {
 						reply = AES.encrypt("User is entered",key);
 						currentuser = incoming;
 						isuser = true;
 						System.out.println("We sent: "+reply);
 						o.writeUTF(reply);
-					}else if (incoming.equals(usermap.get(currentuser))&&isuser) {
+					}else if (incoming.equals(usermap.get(currentuser))&&isuser&&yes) {
 						reply = AES.encrypt("Welcome "+currentuser+" !",key);
 						logged = true;
 						System.out.println("We sent: "+reply);
 						o.writeUTF(reply);
-					}else if (adminmap.containsKey(incoming)) {
+					}else if (adminmap.containsKey(incoming)&&yes) {
 						reply = AES.encrypt("Admin is entered",key);
 						System.out.println("We sent: "+reply);
 						o.writeUTF(reply);
-					}else if (incoming.equals(adminmap.get(currentuser))&&isadmin) {
+					}else if (incoming.equals(adminmap.get(currentuser))&&isadmin&&yes) {
 						reply = AES.encrypt("Welcome Admin",key);
 						System.out.println("We sent: "+reply);
 						adminstat = true;
 						o.writeUTF(reply);
 					}
-					else if (logged) {
+					else if (logged&&yes) {
 						if (incoming.contains("password")) {
 							// password oldpassword:newpassword
 							String oldpass = incoming.substring(9,incoming.indexOf(":"));

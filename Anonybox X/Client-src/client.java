@@ -11,9 +11,12 @@ public class client {
 			String test = "Empty",key = null;
 			while (test.equals("IEK")||test.equals("Empty")) {
 				key = JOptionPane.showInputDialog("Enter the Encryption Key");
+				System.out.println("ENC is entered");
 				o.writeUTF(AES.encrypt("Encryption Test",key));
+				System.out.println("sent is entered");
 				o.flush();
 				test = i.readUTF();
+				System.out.println(test);
 			}
 			while (true) {
 				String cmd = JOptionPane.showInputDialog("Enter the command");
