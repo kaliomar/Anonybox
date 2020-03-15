@@ -113,13 +113,13 @@ public class server {
 						yes = true;
 					}
 				    if (yes) {
-					if (usermap.containsKey(incoming)&&yes) {
+					if (usermap.containsKey(incoming)) {
 						reply = AES.encrypt("User is entered",key);
 						currentuser = incoming;
 						isuser = true;
 						System.out.println("We sent: "+reply);
 						o.writeUTF(reply);
-					}else if (incoming.equals(usermap.get(currentuser))&&isuser&&yes) {
+					}else if (incoming.equals(usermap.get(currentuser))&&isuser) {
 						reply = AES.encrypt("Welcome "+currentuser+" !",key);
 						File tmp0 = new File(currentuser+"-mail.txt");
                                                 boolean exists = tmp0.exists();
@@ -127,17 +127,17 @@ public class server {
 						logged = true;
 						System.out.println("We sent: "+reply);
 						o.writeUTF(reply);
-					}else if (adminmap.containsKey(incoming)&&yes) {
+					}else if (adminmap.containsKey(incoming)) {
 						reply = AES.encrypt("Admin is entered",key);
 						System.out.println("We sent: "+reply);
 						o.writeUTF(reply);
-					}else if (incoming.equals(adminmap.get(currentuser))&&isadmin&&yes) {
+					}else if (incoming.equals(adminmap.get(currentuser))&&isadmin) {
 						reply = AES.encrypt("Welcome Admin",key);
 						System.out.println("We sent: "+reply);
 						adminstat = true;
 						o.writeUTF(reply);
 					}
-					else if (logged&&yes) {
+					else if (logged) {
 						if (incoming.contains("password")) {
 							// password oldpassword:newpassword
 							String oldpass = incoming.substring(9,incoming.indexOf(":"));
@@ -178,8 +178,8 @@ public class server {
 						o.writeUTF(AES.encrypt("invalid command",key));
 						System.out.println("We sent: Inn");
 					}
-				    }
 				}
+				    }
 				}catch (Exception e0) {
 					try {
 						socket.close();
