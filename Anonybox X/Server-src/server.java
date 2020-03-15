@@ -121,6 +121,9 @@ public class server {
 						o.writeUTF(reply);
 					}else if (incoming.equals(usermap.get(currentuser))&&isuser&&yes) {
 						reply = AES.encrypt("Welcome "+currentuser+" !",key);
+						File tmp0 = new File(currentuser+"-mail.txt");
+                                                boolean exists = tmp0.exists();
+                                                if (exists) {System.out.println("exists");}else{tmp0.createNewFile();}
 						logged = true;
 						System.out.println("We sent: "+reply);
 						o.writeUTF(reply);
