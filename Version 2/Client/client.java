@@ -26,28 +26,9 @@ public class client {
         DataOutputStream dos = new DataOutputStream(s.getOutputStream());
         while (true) {
         String cmd = JOptionPane.showInputDialog("Enter the command:");
-        String encCmd = AES.encrypt(cmd,key);
-        while (encCmd.equals(null)||encCmd.equals("")) {
-        	cmd = JOptionPane.showInputDialog("No command entered, Enter the command:");
-        }
-        String content = AES.encrypt(cmd,key);
-        if (content.length()<=63980) {
-            dos.writeUTF(encCmd);
-            }else {
-            for (int oo = 0;oo<(content.length()/63980)+1;oo++) {
-           	 ooo = content.substring(0,63980);
-           	 content = content.replace(ooo,"");
-           	 dos.writeUTF(AES.encrypt(AES.decrypt(content,key)+"SCPNULCHAR",key));
-            }
-        }
+        jsncp.write(dos,cmd,key);
         dos.flush();
-        out = AES.decrypt(dis.readUTF(),key);
-         while (out.contains("SCPNULCHAR")) {
-            dos.writeUTF(AES.encrypt("",key));
-            dos.flush();
-            out = out.replaceAll("SCPNULCHAR","");
-        	out += AES.decrypt(dis.readUTF(),key);
-        }
+        out = jsncp.read(dis,key);
         JOptionPane.showMessageDialog(null, out);
         }
 		}catch(Exception e) {

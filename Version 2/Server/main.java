@@ -44,68 +44,44 @@ public class main {
 		  int limit = 0;
 		   while (true) {
 			   try {
-			   clientSentence = dis.readUTF();
+			   clientSentence = jsncp.read(dis, keyy);
 			   }catch (Exception f) {
 				   s = serverSocket.accept();
 				   dis = new DataInputStream(s.getInputStream());
 				   outToClient = new DataOutputStream(s.getOutputStream());
 				   clientSentence = null;
-				   clientSentence = dis.readUTF();
+				   clientSentence = jsncp.read(dis, keyy);
 			   }
-		   clientSentence = AES.decrypt(clientSentence,keyy);
-		   while (clientSentence.contains("SCPNULCHAR")||clientSentence.equals("")) {
-			   if (limit>=16) {
-				   limit = 0;
-				   outToClient.writeUTF(AES.encrypt("Packet limit Reached !",keyy));
-				   break;
-			   }else {
-				   //DO NOTHING
-			   }
-		       outToClient.writeUTF(AES.encrypt("",keyy));
-		       outToClient.flush();
-		       clientSentence = clientSentence.replaceAll("SCPNULCHAR","");
-		   	clientSentence += AES.decrypt(dis.readUTF(),keyy);
-		   	limit = limit + 1;
-		   }
 		   if (clientSentence.equals(userr)) {
 			   if (!isuser) {
-			   outToClient.writeUTF(AES.encrypt("User is entered !",keyy));
+			   jsncp.write(outToClient,"User is entered !", keyy);
 			   isuser = true;
 			   }else {
-				   outToClient.writeUTF(AES.encrypt("User is already entered !", keyy));
+				   jsncp.write(outToClient,"User is already entered !", keyy);
 			   }
 		   }else if (clientSentence.equals(passs)) {
 			   if (!ispassword) {
 			   if (isuser) {
-			   outToClient.writeUTF(AES.encrypt("Password is entered, Welcome !",keyy));
+			   jsncp.write(outToClient,"Password is entered, Welcome !", keyy);
 			   ispassword = true;
 			   }else {
-				   outToClient.writeUTF(AES.encrypt("No user entered !",keyy));
+				   jsncp.write(outToClient,"No user entered !", keyy);
 			   }
 			   }else {
-				   outToClient.writeUTF(AES.encrypt("You're already logged in !", keyy));
+				   jsncp.write(outToClient,"You're already logged in !", keyy);
 			   }
 		   }else if (clientSentence.contains("nick")) {
 			   nick = clientSentence.substring(5);
-			   outToClient.writeUTF(AES.encrypt("Nickname is set !",keyy));
+			   jsncp.write(outToClient,"Nickname is set !", keyy);
 		   }
 		   else if (clientSentence.equals("show")) {
 			   if (ispassword) {
 			    for (Map.Entry<String, String> entry : data.entrySet()) {
 			        data_dump += entry.getKey() + "->" + entry.getValue() + "\n";
 			    }
-			    reply = AES.encrypt(data_dump, keyy);
-			    if (reply.length()<=63980) {
-			   outToClient.writeUTF(reply);
-			    }else {
-		             for (int oo = 0;oo<(reply.length()/63980)+1;oo++) {
-		            	 String ooo = reply.substring(0,63980);
-		            	 reply = reply.replace(ooo,"");
-		            	 outToClient.writeUTF(AES.encrypt(AES.decrypt(reply,keyy)+"SCPNULCHAR",keyy));
-		             }
-			    }
+				   jsncp.write(outToClient,data_dump, keyy);
 			   }else {
-				   outToClient.writeUTF(AES.encrypt("You can't show messages because you're not logged in !",keyy));
+				   jsncp.write(outToClient,"You can't show messages because you're not logged in !", keyy);
 			   }
 			   reply = "";
 			   data_dump = "";
@@ -117,18 +93,22 @@ public class main {
 			   LocalDateTime now = LocalDateTime.now(); 
 			   msg = msg+" || "+dtf.format(now);
 			   data.put(nick+"|Message no. "+msgCnt,msg);
-			   outToClient.writeUTF(AES.encrypt("Message was sent !",keyy));
+			   jsncp.write(outToClient,"Message was sent !", keyy);
 			   msgCnt++;
 				   }else {
-					   outToClient.writeUTF(AES.encrypt("Please add a nickname",keyy));
+					   jsncp.write(outToClient,"Please add a nickname", keyy);
 				   }
 			   }else {
-				   outToClient.writeUTF(AES.encrypt("You can't write a message because you're not logged in !",keyy));
+				   jsncp.write(outToClient,"You can't write a message because you're not logged in !", keyy);
 			   }
 			   msg = "";
 		   }
 		   else {
-			   outToClient.writeUTF(AES.encrypt("SCPNULCHAR",keyy));
+			    if (clientSentence.isEmpty()) {
+			    	int xxxx = 4/0;
+			    }else {
+			   	jsncp.write(outToClient,"Invalid Command", keyy);
+			    }
 		   }
 		   }
 		   }
