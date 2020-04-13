@@ -1,4 +1,0 @@
-pycryptodome==3.9.6
-flask
-flask_socketio
-flask_wtf
