@@ -21,7 +21,7 @@ AdminHELP ="""
 ip                  : ip address default 127.0.0.1 
 port                : use a specific port default is 3000
 key(optional)       : key is used as way to encrypt data it's not used in this version but 
-                      the default is godisdead
+                      the default is secret
 update              : shows the updates
 new user            : create new user(require Username, password and secret)
                         admin can create only 5 users
@@ -69,7 +69,7 @@ class mas:
         self.port_entry.place(x=150,y=7)
         self.port_entry.insert(0,3000)
         self.key_entry=Entry(width=18)
-        self.key_entry.insert(0,"godisdead")
+        self.key_entry.insert(0,"secret")
         self.key_entry.place(x=210,y=7)
         self.start_button= Button(text="start",command=self.Freezing)
         self.close_button= Button(text="STOP",command=self.shutdown)
@@ -91,11 +91,11 @@ class mas:
         self.Nuser_button= Button(text="New User",command=self.Create_acc)
         self.Nuser_button.place(x=410,y=563)
         self.UserEntry = Entry(width=10)
-        self.UserEntry.insert(0,"isla")
+        self.UserEntry.insert(0,"UserName")
         self.PassEntry = Entry(width=10)
-        self.PassEntry.insert(0,"123")
+        self.PassEntry.insert(0,"Password")
         self.NightEntry = Entry(width=10)
-        self.NightEntry.insert(0,"1234")
+        self.NightEntry.insert(0,"Secret")
         self.UserEntry.place(x=510,y=566)
         self.PassEntry.place(x=600,y=566)
         self.NightEntry.place(x=690,y=566)
@@ -196,7 +196,6 @@ class mas:
         global Me
         conn.send(b'Hello Guest, The connection is not encrypted yet...\nYou only got one chance good luck:)')
         user = conn.recv(1024).decode() #recv the user
-        print(user)
         if len(user) > 0:
                     if user in NightSecretCheck:
                         conn.send(b'OK')
@@ -252,7 +251,6 @@ class mas:
                         blocked_addresses.append(addr)
                         conn.close()
                         blocked_addresses.append(addr)
-                        #self.blocking(conn,addr)
         else:
             mesh = (f"user was not vaild {addr} has been added to the blocked list")
             Thread(target = self.updates,args = (mesg,)).start()
@@ -299,26 +297,28 @@ class mas:
         global NightSecretCheck
         global Online
         global Me
+        global sleeping
         mesg = (f'{user}:{mesg}\n')
         self.admin_cmd.insert(END,mesg)
-        if len(Online) > 0:
-            for users in list(Online):
-                print(f"who is online {users}")
-                try:
-                    night = NightSecretCheck[users]
-                    NewMesg = encrypt(mesg,night)
-                    conn = Me[users]
+        if not user in sleeping:
+            if len(Online) > 0:
+                for users in list(Online):
+                    print(f"who is online {users}")
+                    try:
+                        night = NightSecretCheck[users]
+                        NewMesg = encrypt(mesg,night)
+                        conn = Me[users]
+                        conn.send(NewMesg)
+                    except socket.timeout:
+                        self.updates((f"{users} didn't recv a message\n"))
+            else:
+                if admin:
+                    self.admin_cmd.insert(END,'no one online yet!\n')
+                if not admin:
+                    NewMesg=("no one online yet!")
+                    NewMesg = encrypt(mesg,key)
+                    conn = Me[user]
                     conn.send(NewMesg)
-                except socket.timeout:
-                    self.updates((f"{users} didn't recv a message\n"))
-        else:
-            if admin:
-                self.admin_cmd.insert(END,'no one online yet!\n')
-            if not admin:
-                NewMesg=("no one online yet!")
-                NewMesg = encrypt(mesg,key)
-                conn = Me[user]
-                conn.send(NewMesg)
     def PrivateDM(self,TheSecretMesg,TOsecret,TOconn,user,key,conn):
         global NightSecretCheck
         global Online 
