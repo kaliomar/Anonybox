@@ -11,7 +11,7 @@ ip(require)         : ip address default 127.0.0.1
 port(require)       : use a specific port default is 3000
 key(require)        : key is used as way to encrypt data it's 
                       not used in this version but 
-                      the default is godisdead
+                      the default is secret
 chat                : shows the messages also allow user to pass
                       command to the client
 UserName            : se this user name to login 
@@ -57,7 +57,7 @@ class master:
         self.port_entry.place(x=150,y=7)
         self.port_entry.insert(0,3000)
         self.key_entry=Entry(width=18)
-        self.key_entry.insert(0,"godisdead")
+        self.key_entry.insert(0,"secret")
         self.key_entry.place(x=210,y=7)
         self.start_button= Button(text="start",command=self.connection)
         self.start_button.place(x=370,y=3)
@@ -65,12 +65,12 @@ class master:
         info_lable.pack()
         self.user_entry= Entry(width=17)
         self.user_entry.place(x=4,y=45)
-        self.user_entry.insert(0,"isla")
+        self.user_entry.insert(0,"UserName")
         self.secret_entry= Entry(width=17)
         self.secret_entry.place(x=150,y=45)
-        self.secret_entry.insert(0,"1234")
+        self.secret_entry.insert(0,"Secret")
         self.password_entry=Entry(width=17)
-        self.password_entry.insert(0,"123")
+        self.password_entry.insert(0,"Password")
         self.password_entry.place(x=295,y=45)
         self.login_button= Button(text="Login",command=self.Account)
         self.login_button.configure(state=DISABLED)
