@@ -1,6 +1,5 @@
-from AES import decrypt
-#from .AES import *
 
+from .AES import *
 def night_sec(secret,user_secret):#check if the user passed a valid secret
     try:
         hmm = decrypt(user_secret,secret).decode()
