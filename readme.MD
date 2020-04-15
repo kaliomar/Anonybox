@@ -15,7 +15,6 @@ AES256 CBC PKCS#5/7 with All-zeroed IV
 ## Team:
 * Morad Abdelrasheed Mokhtar (qarqoush) Java Programmer 🇪🇬
 * Isla Mukheef (IslaIDK) Python Programmer 🇹🇷/🇮🇶
-* Khaled Nassar (knassar702) Flask Framework Programmer 🇪🇬
 
 ## Thank you list:
 * Loaii Abdelsalam
