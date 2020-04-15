@@ -18,4 +18,5 @@ You will see an output of this syntax [key] [username] [password]. Each of them 
  ~~~~
 > java client
  ~~~~
-You will be prompted to enter the encryption key. Then in [Type the command] prompt enter the username and press [Enter] then enter the password and press [Enter].
+You will be prompted to enter the encryption key. Then in [Type the command] prompt enter the username and press [Enter] then enter the password and press [Enter].<br>
+To GET a site. type command "visit http://[site].blabla"
