@@ -17,8 +17,9 @@ AES256 CBC PKCS#5/7 with All-zeroed IV
 * Isla Mukheef (IslaIDK) Python Programmer 🇹🇷/🇮🇶
 
 ## Thank you list:
-* Loaii Abdelsalam
-* Ziad Abouelfarah (ziadab)
+* Loaii Abdelsalam (loaiabdalslam) 🇪🇬
+* Ziad Abouelfarah (ziadab) 🇲🇦
+* Mustafa Anwar 🇪🇬
 
 <p align="center">
 <img width="205" height="210" src="https://i.ya-webdesign.com/images/badge-transparent-communist-1.png">
