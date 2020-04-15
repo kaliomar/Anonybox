@@ -3,8 +3,8 @@ AES-256 Encrypted E-mail/Chat Service Project made in Java/Python
 
 ## Versions:
 - Java:
-Anonybox X -> Standard Mail Service
-Anonybox V2.0 -> Fast Chatting Service with unified user/pass but different nicknames
+Anonybox X -> Standard Mail Service<br>
+Anonybox V2.0 -> Fast Chatting Service with unified user/pass but different nicknames<br>
 Anonyweb -> Experimental Tor-Alternative for making HTTP requests
 - Python:
 Anonybox Beta -> Standard Mail Service
@@ -15,11 +15,11 @@ AES256 CBC PKCS#5/7 with All-zeroed IV
 ## Team:
 * Morad Abdelrasheed Mokhtar (qarqoush) Java Programmer 🇪🇬
 * Isla Mukheef (IslaIDK) Python Programmer 🇹🇷/🇮🇶
-* Khaled Nassar (knassar702) Flask Framework Programmer 🇪🇬
 
 ## Thank you list:
-* Loaii Abdelsalam
-* Ziad Abouelfarah (ziadab)
+* Loaii Abdelsalam (loaiabdalslam) 🇪🇬
+* Ziad Abouelfarah (ziadab) 🇲🇦
+* Mustafa Anwar 🇪🇬
 
 <p align="center">
 <img width="205" height="210" src="https://i.ya-webdesign.com/images/badge-transparent-communist-1.png">
