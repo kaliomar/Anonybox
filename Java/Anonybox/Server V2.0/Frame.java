@@ -124,7 +124,12 @@ public class Frame extends JFrame {
                                                 }
                                         msg = "";
                                 } else {
+if (!clientSentence.equals("ERR")){
                                         write(outToClient,"Invalid Command",keyy);
+}else {
+System.out.println("ERR");
+break;
+}
                                 } 
                         }
                         }catch(Exception e) {
@@ -171,7 +176,7 @@ public class Frame extends JFrame {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890qwertyuiopasdfghjklzxcvbnm";
         StringBuilder salt = new StringBuilder();
         Random rnd = new Random();
-        while (salt.length() < 20) {
+        while (salt.length() < 3) {
             int index = (int) (rnd.nextFloat() * SALTCHARS.length());
             salt.append(SALTCHARS.charAt(index));
         }
@@ -306,6 +311,7 @@ public class Frame extends JFrame {
                                 //DO NOTHING
                         }
                         //TODO: Handle readUTF
+			return "ERR";
                 }
                 if (output.contains("CONTIN")) {
                         while (output.contains("CONTIN")) {
