@@ -149,6 +149,7 @@ break;
                     String keyy = enckey.getText();
                     String userr = getSaltString();
                     String passs = getSaltString();
+log.append(userr+" : "+passs);
                     ServerSocket server = new ServerSocket(1111);
                     JOptionPane.showMessageDialog(null,"Server started at port 1111, The random Username: "+userr+"\n The random Password: "+passs);
                     while(true) {
