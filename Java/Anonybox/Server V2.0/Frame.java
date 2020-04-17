@@ -11,11 +11,7 @@ import java.util.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-
+import javax.swing.*;
 public class Frame extends JFrame {
     private JTextField enckey = new JTextField();
     private JButton start = new JButton();
