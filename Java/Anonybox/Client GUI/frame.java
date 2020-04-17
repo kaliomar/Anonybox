@@ -1,5 +1,4 @@
-
-import javax.crypto.Cipher;
+import javax.crypto.*;
 import javax.crypto.spec.*;
 import javax.swing.*;
 import java.io.*;
