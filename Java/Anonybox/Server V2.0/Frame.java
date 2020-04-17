@@ -111,7 +111,7 @@ public class Frame extends JFrame {
                                                 }
                                         msg = "";
                                 } else {
-if (!clientSentence.equals("ERR")){
+while (!clientSentence.equals("ERR")){
                                         write(outToClient,"Invalid Command",keyy);
 }else {
 System.out.println("ERR");
