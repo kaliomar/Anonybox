@@ -1,4 +1,4 @@
-import java.awt.Dimension;
+import java.awt.*;
 import javax.crypto.*;
 import javax.crypto.spec.*;
 import javax.swing.*;
@@ -9,7 +9,6 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.format.*;
 import java.util.*;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
