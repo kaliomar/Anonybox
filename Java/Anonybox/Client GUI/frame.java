@@ -24,7 +24,6 @@ public class frame extends JFrame {
     private JTextArea jTextArea1 = new JTextArea();
     private JTextField jTextField5 = new JTextField();
     private JButton jButton3 = new JButton();
-
     public frame() {
         try {
             jbInit();
@@ -54,6 +53,14 @@ public class frame extends JFrame {
         jTextField3.setText("Username");
         jTextField4.setText("Password");
         jButton2.setText("Login");
+jTextField1.setVisible(true);
+jTextField2.setVisible(true);
+jTextField3.setVisible(true);
+jTextField4.setVisible(true);
+jTextField5.setVisible(true);
+jButton1.setVisible(true);
+jButton2.setVisible(true);
+jButton3.setVisible(true);
         jButton1.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                // CONNECTION
