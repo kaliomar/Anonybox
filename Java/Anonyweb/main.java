@@ -3,7 +3,7 @@ import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.util.*;
-import javax.crypto.Cipher;
+import javax.crypto.*;
 import javax.crypto.spec.*;
 public class main {
     private static SecretKeySpec secretKey;
