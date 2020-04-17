@@ -11,7 +11,6 @@ import java.util.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
-import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
