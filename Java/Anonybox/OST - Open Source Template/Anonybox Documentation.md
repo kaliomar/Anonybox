@@ -49,27 +49,27 @@
 
   * ```java 
     int port = 10;
-    ```
+    ``` 
     Sets The Server port
 
   * ```java 
     String enckey = "";
-    ```
+    ``` 
     Sets The Encryption Key
 
   * ```java 
     ServerSocket s = new ServerSocket(port);
-    ```
+    ``` 
     Initialize The Server with specified port
 
   * ```java 
     Accept a = new Accept(s,enckey);
-    ```
+    ``` 
    Initialize Accept Class with ServerSocket and Encryption Key
 
   * ```java 
     a.start();
-    ```
+    ``` 
    Start the Accept Class Thread
 
 * **static class Accept extends Thread**
@@ -77,19 +77,19 @@
 
   * ```java 
     Accept(ServerSocket s,String enckey)
-    ```
+    ``` 
     Constructor for class. sets Inputs to public variables
 
   * ```java 
     public void run()
-    ```
+    ``` 
     Run method. It's role is to accept User connection and redirects Socket to ServerThread to process the user input
-    * ```java 
+    * ```java
       Socket c = s.accept();
-      ```
+      ``` 
      Accept user connection
-    * ```java 
-      System.out.println(c.getInetAddress() + " is connected" + "\n");
+    * ```java
+     System.out.println(c.getInetAddress() + " is connected" + "\n");
       ```
      Log who is connected to the server. can be deleted.
     * ```java 
@@ -98,7 +98,7 @@
      Initialize ServerThread Class with the user connection and the Encryption Key
     * ```java 
      st.start();
-      ```
+      ``` 
      Start ServerThread Thread
 
 * **static class ServerThread extends Thread**
