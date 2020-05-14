@@ -89,15 +89,15 @@
       ``` 
      Accept user connection
     * ```java
-     System.out.println(c.getInetAddress() + " is connected" + "\n");
+      System.out.println(c.getInetAddress() + " is connected" + "\n");
       ```
      Log who is connected to the server. can be deleted.
     * ```java 
-     ServerThread st = new ServerThread(c,enckey);
+      ServerThread st = new ServerThread(c,enckey);
       ```
      Initialize ServerThread Class with the user connection and the Encryption Key
     * ```java 
-     st.start();
+      st.start();
       ``` 
      Start ServerThread Thread
 
