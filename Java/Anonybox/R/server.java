@@ -153,26 +153,20 @@ public class server extends JFrame {
                 //Read and reply BLOCK
                 while (true) {
                     //Read User Input
-                    read = dis.readUTF();
                     //Decrypt it
-                    recieve = decrypt(read, enckey);
+                    recieve = read(dis,enckey);
                     log.append(s.getInetAddress() + " sent " + recieve + "\n");
                     //Check Encryption Key
                     if (recieve.equals("ERR" + read)) {
                         //INVALID Encryption Key Status
                         dos.writeUTF("Invalid Encryption Key / Bad Message");
                     } else {
-                        //Valid Encryption Key Status
-                        //Read USER and ADMIN creds
                         userCreds = new String(Files.readAllBytes(Paths.get("user.txt")));
                         adminCreds = new String(Files.readAllBytes(Paths.get("admin.txt")));
-                        //Arrange them in array
                         String[] userdb = userCreds.split(",");
                         String[] admindb = adminCreds.split(",");
-                        //Hashmaps init
                         HashMap<String, String> usermap = new HashMap<String, String>();
                         HashMap<String, String> adminmap = new HashMap<String, String>();
-                        //Arrange creds in the initialized Hashmaps
                         for (int x = 0; x < userdb.length; x++) {
                             String usercred = userdb[x];
                             String[] pair = usercred.split(":");
@@ -410,6 +404,7 @@ public class server extends JFrame {
             //DO NOTHING
         }
         System.out.println(output);
+        output = output.replaceAll("[-.\\+*?\\[^\\]$(){}=!<>|:\\\\]", "");
         return output;
     }
 }

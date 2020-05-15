@@ -100,6 +100,7 @@ public class anonybox {
 			//DO NOTHING
 		}
 		if (debug>0) System.out.println(output);
+		output = output.replaceAll("[-.\\+*?\\[^\\]$(){}=!<>|:\\\\]", "");
 		return output;
 		}
 public static class AES {
