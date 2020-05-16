@@ -29,7 +29,7 @@
     C. Exploitation code must not be disclosed under any circumstances<br>
 ### 7. Contact<br>
    A. When reporting a vulnerability, please report it only to morad.gill@gmail.com<br>
-    B. Should not be disclosed "see Rule 6.A and 6.B"<br>
+    B. Vulnerability Should not be disclosed "see Rules section 6"<br>
 ### 8. Verification<br>
    A. Time to verify a vulnerability ~7 Days<br>
     B. Must qualify all rules before verification<br>
