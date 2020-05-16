@@ -22,9 +22,11 @@
     C. Vulnerability Impact<br>
     D. Vulnerability Re-production steps<br>
     E. Vulnerable code snippet "if possible"<br>
+    F. Exploit Code<br>
 ### 6. Rules of public disclosure<br>
    A. When vulnerability is closed as dublicate|N/A<br>
     B. When the vulnerability is fixed<br>
+    C. Exploitation code must not be disclosed under any circumstances<br>
 ### 7. Contact<br>
    A. When reporting a vulnerability, please report it only to morad.gill@gmail.com<br>
     B. Should not be disclosed "see Rule 6.A and 6.B"<br>
