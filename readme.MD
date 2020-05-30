@@ -15,13 +15,11 @@ AES256 CBC PKCS#5/7 with All-zeroed IV
 
 ## Team:
 * Morad Abdelrasheed Mokhtar (qarqoush) Java Programmer 🇪🇬
-* Isla Mukheef (IslaIDK) Python Programmer 🇹🇷/🇮🇶
-
 ## Thank you list:
 * Loaii Abdelsalam (loaiabdalslam) 🇪🇬
 * Ziad Abouelfarah (ziadab) 🇲🇦
 * Mustafa Anwar 🇪🇬
-
+* Isla Mukheef (IslaIDK) Former Python Programmer 🇹🇷/🇮🇶
 <p align="center">
 <img width="205" height="210" src="https://i.ya-webdesign.com/images/badge-transparent-communist-1.png">
 <br>
