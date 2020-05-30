@@ -4,7 +4,7 @@
     C. Anonybox R "Java"<br>
     D. Anonybox OST "Java"<br>
 ### 2. Bug Bounty Rewards Rules<br>
-   A. The reward is 500 E.G.P. or an equilivant to that reward "bitcoin, gift card, etc.."<br>
+   A. The reward is determined or an equilivant to that reward "bitcoin, gift card, etc.."<br>
     B. Reward is one-time-payment <br>
     C. Reward can be withdrew using Paypal "if possible" or other electonic verified payment methods<br>
 ### 3. Out-of-scope Vulnerabilities<br>
