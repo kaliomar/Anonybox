@@ -1,26 +1,15 @@
 import java.time.format.*;
-
 import java.io.*;
-
 import java.net.*;
-
 import java.nio.file.*;
-
 import java.util.*;
-
 import javax.crypto.*;
-
 import java.time.*;
-
 import java.awt.*;
 import java.awt.event.*;
-
 import java.security.*;
-
 import javax.crypto.spec.*;
-
 import javax.swing.*;
-
 public class server extends JFrame {
     private JLabel title = new JLabel();
     private JTextField enckey = new JTextField();
