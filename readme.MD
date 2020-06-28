@@ -13,8 +13,6 @@ Anonybox Beta -> Standard Mail Service
 ## Encryption Details:
 AES256 CBC PKCS#5/7 with All-zeroed IV
 
-## Team:
-* Morad Abdelrasheed Mokhtar (qarqoush) Java Programmer 🇪🇬
 ## Thank you list:
 * Loaii Abdelsalam (loaiabdalslam) 🇪🇬
 * Ziad Abouelfarah (ziadab) 🇲🇦
