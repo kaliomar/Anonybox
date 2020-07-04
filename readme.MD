@@ -3,9 +3,6 @@ AES-256 Encrypted E-mail/Chat Service Project made in Java/Python
 
 ## Versions:
 - Java:
-Anonybox X -> Standard Mail Service<br>
-Anonybox V2.0 -> Fast Chatting Service with unified user/pass but different nicknames<br>
-Anonyweb -> Experimental Tor-Alternative for making HTTP requests<br>
 Anonybox R -> Standard Mail Service up-to-date
 - Python:
 Anonybox Beta -> Standard Mail Service
