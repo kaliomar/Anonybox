@@ -10,12 +10,19 @@ Anonybox Beta -> Standard Mail Service
 ## Encryption Details:
 AES256 CBC PKCS#5/7 with All-zeroed IV
 
-## Thank you list:
+## Contributers :
 * Loaii Abdelsalam (loaiabdalslam) 🇪🇬
 * Ziad Abouelfarah (ziadab) 🇲🇦
 * Mustafa Anwar 🇪🇬
 * Isla Mukheef (IslaIDK) Former Python Programmer 🇹🇷/🇮🇶
 * Khaled Nassar (knassar702) Bug Hunter. Discovered A vulnerability in Anonybox Python [ANON-0001] 🇪🇬
+* Zeyad Azima (Cyber-Atom) 🇪🇬
+* Morad Abdelrasheed Mokhtar (qarqoush) "The creator lol" 🇪🇬
+* Pavly O. Halim 🇪🇬
+* Marawan Walid 🇪🇬
+* Omar Hany 🇪🇬
+* Aous Hossam Eldeen 🇸🇾 
+
 <p align="center">
 <img width="205" height="210" src="https://i.ya-webdesign.com/images/badge-transparent-communist-1.png">
 <br>
