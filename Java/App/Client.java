@@ -1,28 +1,16 @@
-/**
- *
- * @author Morad
- */
 package App;
-
-import java.io.DataInputStream;
-
-import java.io.DataOutputStream;
-
+import java.io.*;
 import java.net.Socket;
-
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author Morad
  */
 public class Client extends javax.swing.JFrame {
-
     /** Creates new form main */
     public Client() {
         initComponents();
     }
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -30,7 +18,6 @@ public class Client extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     private void initComponents() {//GEN-BEGIN:initComponents
-
         ip_label = new javax.swing.JLabel();
         key_label = new javax.swing.JLabel();
         ip = new javax.swing.JTextField();
@@ -40,32 +27,24 @@ public class Client extends javax.swing.JFrame {
         password = new javax.swing.JTextField();
         username_label = new javax.swing.JLabel();
         password_label = new javax.swing.JLabel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Anonybox R Client");
         setResizable(false);
-
         ip_label.setText("IP Address");
-
         key_label.setText("Encryption Key");
-
         ip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ipActionPerformed(evt);
             }
         });
-
         connect.setText("Connect");
         connect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 connectActionPerformed(evt);
             }
         });
-
         username_label.setText("Username");
-
         password_label.setText("Password");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,14 +95,11 @@ public class Client extends javax.swing.JFrame {
                 .addComponent(connect)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
         pack();
     }//GEN-END:initComponents
-
     private void ipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ipActionPerformed
-
     private void connectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectActionPerformed
         connection c = new connection(ip.getText(),key.getText(),username.getText(),password.getText());
         c.start();
@@ -241,7 +217,6 @@ public class Client extends javax.swing.JFrame {
                          .SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt
             .EventQueue
@@ -251,7 +226,6 @@ public class Client extends javax.swing.JFrame {
                 }
             });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton connect;
     private javax.swing.JTextField ip;
