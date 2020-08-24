@@ -1,18 +1,12 @@
 package App;
-
 import java.io.*;
-
 import java.security.*;
-
 import java.util.*;
-
 import javax.crypto.spec.*;
 import javax.crypto.Cipher;
-
 public class anonybox {
     static int DATA_BUFFER_CONST = 65531;
     static byte[] EMPTY_IV = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
     /**
      * @return 
      */
@@ -63,7 +57,6 @@ public class anonybox {
         if (out.isEmpty()) out = "NOTHING";
         return out;
     }
-
     /**
      * @param s
      * @param text
