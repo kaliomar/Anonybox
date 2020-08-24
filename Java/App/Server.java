@@ -6,10 +6,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import javax.swing.JOptionPane;
-/**
- *
- * @author Morad
- */
 public class Server extends javax.swing.JFrame {
     private String user_path, admin_path, db_path;
 
@@ -321,7 +317,7 @@ public class Server extends javax.swing.JFrame {
                             String pass = i.substring(5);
                             if (userDB.get(username).equals(pass)) {
                                 anonybox.write(DOS, "Welcome " + username, enckey, iv);
-                                File f = new File(userIDs.get(username) + "-mail.txt");
+                                File f = new File("./DATA/"+userIDs.get(username) + "-mail.txt");
                                 if (f.exists()) {
                                 } else {
                                     f.createNewFile();

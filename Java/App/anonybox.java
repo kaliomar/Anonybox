@@ -7,9 +7,6 @@ import javax.crypto.Cipher;
 public class anonybox {
     static int DATA_BUFFER_CONST = 65531;
     static byte[] EMPTY_IV = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    /**
-     * @return 
-     */
     public static HashMap<String,String> TTHM(String text, String EDelimiter, String KVDelimiter) {
         HashMap<String,String> out = new HashMap<String,String>();
             String[] AText = text.split(EDelimiter);
@@ -32,7 +29,7 @@ public class anonybox {
         return saltStr;
     }
     public static void writeFile(String path, String text) throws Exception {
-              FileWriter myWriter = new FileWriter(path,false);
+              FileWriter myWriter = new FileWriter("./DATA/"+path,false);
               myWriter.write(text);
               myWriter.close();
         }
@@ -42,48 +39,21 @@ public class anonybox {
               myWriter.write(text);
               myWriter.close();
         }
-
-    /**
-     * @param filename 
-     * @return
-     * @throws FileNotFoundException
-     */
     public static String readFile(String filename) throws FileNotFoundException {
         String out = "";
-        File file = new File(filename);
+        File file = new File("./DATA/"+filename);
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine())
             out += sc.nextLine();
         if (out.isEmpty()) out = "NOTHING";
         return out;
     }
-    /**
-     * @param s
-     * @param text
-     * @param key
-     * @param iv
-     */
     public static void write(DataOutputStream s, String text, String key, byte[] iv) {
         write(s, text, key, 0, iv);
     }
-
-    /**
-     * @param s
-     * @param key
-     * @param iv
-     * @return
-     */
     public static String read(DataInputStream s, String key, byte[] iv) {
         return read(s, key, 0, iv);
     }
-
-    /**
-     * @param s
-     * @param text
-     * @param key
-     * @param debug
-     * @param iv
-     */
     public static void write(DataOutputStream s, String text, String key, int debug, byte[] iv) {
         if (text.isEmpty()) {
             System.out.println("Text var is empty");
@@ -140,14 +110,6 @@ public class anonybox {
             //TODO: Handle s.flush();
         }
     }
-
-    /**
-     * @param s
-     * @param key
-     * @param debug
-     * @param iv
-     * @return
-     */
     public static String read(DataInputStream s, String key, int debug, byte[] iv) {
         if (key.isEmpty()) {
             if (debug > 0)
@@ -188,14 +150,9 @@ public class anonybox {
         }
         return output;
     }
-
     public static class AES {
         private static SecretKeySpec secretKey;
         private static byte[] key;
-
-        /**
-         * @return
-         */
         public static byte[] generateIV() {
             int ivSize = 16;
             byte[] iv = new byte[ivSize];
@@ -203,10 +160,6 @@ public class anonybox {
             random.nextBytes(iv);
             return iv;
         }
-
-        /**
-         * @param myKey
-         */
         public static void setKey(String myKey) {
             MessageDigest sha = null;
             try {
@@ -221,13 +174,6 @@ public class anonybox {
                 e.printStackTrace();
             }
         }
-
-        /**
-         * @param strToEncrypt
-         * @param secret
-         * @param iv
-         * @return
-         */
         public static String encrypt(String strToEncrypt, String secret, byte[] iv) {
             try {
                 IvParameterSpec ivspec = new IvParameterSpec(iv);
@@ -240,13 +186,6 @@ public class anonybox {
             }
             return null;
         }
-
-        /**
-         * @param strToDecrypt
-         * @param secret
-         * @param iv
-         * @return
-         */
         public static String decrypt(String strToDecrypt, String secret, byte[] iv) {
             try {
                 IvParameterSpec ivspec = new IvParameterSpec(iv);

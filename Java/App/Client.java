@@ -2,10 +2,6 @@ package App;
 import java.io.*;
 import java.net.Socket;
 import javax.swing.JOptionPane;
-/**
- *
- * @author Morad
- */
 public class Client extends javax.swing.JFrame {
     /** Creates new form main */
     public Client() {
