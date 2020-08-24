@@ -1,26 +1,11 @@
 package App;
-
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import java.math.BigInteger;
-
-import java.net.ServerSocket;
-import java.net.Socket;
-
+import java.io.*;
+import java.math.*;
+import java.net.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import java.util.Arrays;
-
-import java.util.HashMap;
-
+import java.util.*;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author Morad
@@ -33,12 +18,10 @@ public class Server extends javax.swing.JFrame {
         initComponents();
         inin();
     }
-
     private void inin() {
         this.setTitle("Anonybox R Server");
         requirement.setText("<html>All fields marked with \"*\" are required.</html>");
     }
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -46,7 +29,6 @@ public class Server extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     private void initComponents() {//GEN-BEGIN:initComponents
-
         enck = new javax.swing.JTextField();
         user = new javax.swing.JTextField();
         admin = new javax.swing.JTextField();
@@ -57,41 +39,29 @@ public class Server extends javax.swing.JFrame {
         start = new javax.swing.JButton();
         admin_label1 = new javax.swing.JLabel();
         db_file = new javax.swing.JTextField();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Anonybox R Server");
         setResizable(false);
-
         enck.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         enck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enckActionPerformed(evt);
             }
         });
-
         user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         admin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         enckey_label.setText("Encryption Key *");
-
         user_label.setText("Users' DB File *");
-
         admin_label.setText("Admins' DB File *");
-
         requirement.setText("All fields marked with \"*\" are required.");
-
         start.setText("Start Server");
         start.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startActionPerformed(evt);
             }
         });
-
         admin_label1.setText("IDs' DB File *");
-
         db_file.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,7 +113,6 @@ public class Server extends javax.swing.JFrame {
                     .addComponent(db_file, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(110, Short.MAX_VALUE))
         );
-
         pack();
     }//GEN-END:initComponents
     String enckey = "";
@@ -152,7 +121,6 @@ public class Server extends javax.swing.JFrame {
     private void enckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enckActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_enckActionPerformed
-
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
         enckey = enck.getText();
         boolean userIsEmpty = user.getText().isEmpty();
@@ -233,7 +201,6 @@ public class Server extends javax.swing.JFrame {
                          .SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt
             .EventQueue
@@ -243,7 +210,6 @@ public class Server extends javax.swing.JFrame {
                 }
             });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField admin;
     private javax.swing.JLabel admin_label;
@@ -259,13 +225,11 @@ public class Server extends javax.swing.JFrame {
     class ServerThread extends Thread {
         public Socket s;
         public String enckey;
-
         ServerThread(Socket s, String enckey) {
             //Constructor
             this.s = s;
             this.enckey = enckey;
         }
-
         @Override
         public void run() {
             HashMap<String,String> userDB = new HashMap<String,String>();
@@ -417,7 +381,6 @@ public class Server extends javax.swing.JFrame {
                             } else {
                                 anonybox.write(DOS, "You're not logged in", enckey, iv);
                             }
-                            
                         } else if (i.contains("compose")) {
                             if (userIsLogged) {
                                 String content = i.substring(8, i.indexOf(","));
@@ -477,28 +440,23 @@ public class Server extends javax.swing.JFrame {
                     }
                 }
             } catch (Exception e) {
+				System.out.println("[CRITICAL] Error just happened");
                 e.printStackTrace();
             }
         }
         public double gR(long min, long max){
-
             long x = (long) ((Math.random() * ((max - min) + 1)) + min);
-
             return x;
-
         }
     }
-
     class Accept extends Thread {
         public ServerSocket s;
         public String enckey;
-
         Accept(ServerSocket s, String enckey) {
             // Constructor
             this.s = s;
             this.enckey = enckey;
         }
-
         @Override
         public void run() {
             try {
@@ -510,6 +468,7 @@ public class Server extends javax.swing.JFrame {
                     st.start(); // Start the ServerThread
                 }
             } catch (Exception ee) {
+				System.out.println("[CRITICAL] Error just happened");
                 ee.printStackTrace();
             }
         }
