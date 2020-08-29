@@ -30,13 +30,13 @@ public class anonybox {
     }
     public static void writeFile(String path, String text) throws Exception {
               FileWriter myWriter = new FileWriter("./DATA/"+path,false);
-              myWriter.write(text);
+              myWriter.write(readFile("./DATA/"+path).replace("NOTHING","")+text);
               myWriter.close();
         }
     public static void writeData(String path, String text,String d) throws Exception {
                 if (!anonybox.readFile(path).equals("NOTHING")) text = d+text; 
               FileWriter myWriter = new FileWriter("./DATA/"+path,false);
-              myWriter.write(text);
+              myWriter.write(readFile("./DATA/"+path).replace("NOTHING","")+text);
               myWriter.close();
         }
     public static String readFile(String filename) throws FileNotFoundException {

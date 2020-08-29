@@ -393,6 +393,7 @@ public class Server extends javax.swing.JFrame {
                                     userDB.remove(olduser,PtbS);
                                     userDB.put(newuser, PtbS);
                                     anonybox.writeFile(user_path, anonybox.readFile(user_path).replaceAll(olduser+":"+PtbS, newuser+":"+PtbS));
+									anonybox.writeFile(db_data, anonybox.readFile(db_data).replaceAll(olduser,newuser));
                                     anonybox.write(DOS, "Done", enckey, iv);
                                 }else {
                                     anonybox.write(DOS, "Wrong old username", enckey, iv);
