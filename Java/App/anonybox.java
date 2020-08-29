@@ -30,22 +30,31 @@ public class anonybox {
     }
     public static void writeFile(String path, String text) throws Exception {
               FileWriter myWriter = new FileWriter("./DATA/"+path,false);
-              myWriter.write(readFile("./DATA/"+path).replace("NOTHING","")+text);
+              myWriter.write(text);
               myWriter.close();
         }
     public static void writeData(String path, String text,String d) throws Exception {
-                if (!anonybox.readFile(path).equals("NOTHING")) text = d+text; 
-              FileWriter myWriter = new FileWriter("./DATA/"+path,false);
-              myWriter.write(readFile("./DATA/"+path).replace("NOTHING","")+text);
+		      FileWriter myWriter = null;
+              if (anonybox.readFile(path).equals("NOTHING")){ 
+				myWriter = new FileWriter("./DATA/"+path,false);
+			  }else {
+				text = d+text; 
+			    myWriter = new FileWriter("./DATA/"+path,true);  
+			  }
+              myWriter.write(text);
               myWriter.close();
         }
     public static String readFile(String filename) throws FileNotFoundException {
         String out = "";
         File file = new File("./DATA/"+filename);
         Scanner sc = new Scanner(file);
-        while (sc.hasNextLine())
+        while (sc.hasNextLine()) {
             out += sc.nextLine();
-        if (out.isEmpty()) out = "NOTHING";
+		}
+        if (out.isEmpty()) {
+			out = "NOTHING";
+		}
+		System.out.println(out);
         return out;
     }
     public static void write(DataOutputStream s, String text, String key, byte[] iv) {

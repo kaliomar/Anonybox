@@ -228,6 +228,7 @@ public class Server extends javax.swing.JFrame {
             adminIsEntered = false;
             try {
                 String db_data = anonybox.readFile(db_path);
+				System.out.println(db_data);
                 userIDs = anonybox.TTHM(db_data,",",":");
             if (user_path.contains("_RANDOM")) {
                 userRandom = true;
@@ -236,10 +237,10 @@ public class Server extends javax.swing.JFrame {
                 userRandom = false;
             }
             if (admin_path.contains("_RANDOM")) {
-                adminRandom = true;
+                adminRandom = false;
                 admin_path = admin_path.replaceAll("_RANDOM", "");
             } else {
-                adminRandom = false;
+                adminRandom = true;
             }
             if (!userRandom) {
                 try {
@@ -264,6 +265,9 @@ public class Server extends javax.swing.JFrame {
             DataInputStream DIS = new DataInputStream(s.getInputStream());
             DataOutputStream DOS = new DataOutputStream(s.getOutputStream());
             String username = "";
+			        for (Map.Entry<String,String> entry : adminDB.entrySet())  
+            System.out.println("Key = " + entry.getKey() + 
+                             ", Value = " + entry.getValue()); 
             byte[] iv = anonybox.EMPTY_IV;
                 while (true) {
                     String i = anonybox.read(DIS, enckey, iv);
@@ -294,17 +298,21 @@ public class Server extends javax.swing.JFrame {
                     } else if (i.length() > 4) {
                         if (i.substring(0, 5).contains("user") && !userIsLogged && !adminIsLogged) {
                             username = i.substring(5);
-                            if (userDB.containsKey(username)) {
+                            if (userDB.containsKey(username) || adminDB.containsKey(username)) {
                                 anonybox.write(DOS, "Username is entered", enckey, iv);
-                                userIsEntered = true;
-                            } else if (adminDB.containsKey(username)) {
-                                anonybox.write(DOS, "Admin is entered", enckey, iv);
-                                adminIsEntered = true;
-                            } else if (!userDB.containsKey(username) || !adminDB.containsKey(username))
-                                anonybox.write(DOS, "No username is found", enckey, iv);
+								if (userDB.containsKey(username)) {
+									userIsEntered = true;
+								}else {
+									adminIsEntered = true;
+								}
+                            }
+							else if (!userDB.containsKey(username) || !adminDB.containsKey(username))
+							{
+								anonybox.write(DOS, "No username is found", enckey, iv);
+							}
                         } else if (i.substring(0, 5).contains("pass") && userIsEntered ^ adminIsEntered) {
                             String pass = i.substring(5);
-                            if (userDB.get(username).equals(pass)) {
+                            if (userIsEntered && userDB.get(username).equals(pass)) {
                                 anonybox.write(DOS, "Welcome " + username, enckey, iv);
                                 File f = new File("./DATA/"+userIDs.get(username) + "-mail.txt");
                                 if (f.exists()) {
@@ -312,7 +320,7 @@ public class Server extends javax.swing.JFrame {
                                     f.createNewFile();
                                 }
                                 userIsLogged = true;
-                            } else if (adminDB.get(username).equals(pass)) {
+                            } else if (adminIsEntered && adminDB.get(username).equals(pass)) {
                                 anonybox.write(DOS, "Welcome Admin " + username, enckey, iv);
                                 adminIsLogged = true;
                             } else if (!userDB.get(username).equals(pass) || !adminDB.get(username).equals(pass)) {
@@ -372,9 +380,14 @@ public class Server extends javax.swing.JFrame {
                                 String dest = i.substring(i.indexOf(",") + 1);
                                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
                                 LocalDateTime now = LocalDateTime.now();
-                                String line = username + ":" + content + ":" + dtf.format(now);
+                                String line = "";
+								if(anonybox.readFile(userIDs.get(dest)+"-mail.txt").equals("NOTHING")) {
+									line = username + ":" + content + ":" + dtf.format(now);
+								}else {
+									line = ","+username + ":" + content + ":" + dtf.format(now);
+								}
                                 try {
-                                    anonybox.writeData(userIDs.get(dest) + "-mail.txt", line,",");
+                                    anonybox.writeData(userIDs.get(dest) + "-mail.txt", anonybox.readFile(userIDs.get(dest) + "-mail.txt")+line,",");
                                     anonybox.write(DOS, "Done !", enckey, iv);
                                 } catch (Exception e) {
                                     e.printStackTrace();
@@ -393,7 +406,7 @@ public class Server extends javax.swing.JFrame {
                                     userDB.remove(olduser,PtbS);
                                     userDB.put(newuser, PtbS);
                                     anonybox.writeFile(user_path, anonybox.readFile(user_path).replaceAll(olduser+":"+PtbS, newuser+":"+PtbS));
-									anonybox.writeFile(db_data, anonybox.readFile(db_data).replaceAll(olduser,newuser));
+									anonybox.writeFile(db_path, anonybox.readFile(db_path).replaceAll(olduser,newuser));
                                     anonybox.write(DOS, "Done", enckey, iv);
                                 }else {
                                     anonybox.write(DOS, "Wrong old username", enckey, iv);
@@ -407,7 +420,7 @@ public class Server extends javax.swing.JFrame {
                                 String pass = i.substring(i.indexOf(",")+1);
                                 userDB.put(user, pass);
                                 anonybox.writeData(user_path, user+":"+pass, ",");
-                                anonybox.writeData(db_path,user+":"+gR(0000000000,9999999999L),",");
+                                anonybox.writeData(db_path,user+":"+gR(),",");
                                 anonybox.write(DOS, "Done !", enckey, iv);
                             }else {
                                 anonybox.write(DOS, "You're not an admin", enckey, iv);
@@ -416,8 +429,20 @@ public class Server extends javax.swing.JFrame {
                             if(adminIsLogged) {
                                 String user = i.substring(12,i.indexOf(","));
                                 String pass = i.substring(i.indexOf(",")+1);
-                                String yasss = user+":"+pass;
+                                String yasss = "";
+								String y = "";
+								if(anonybox.readFile(user_path).equals("NOTHING")) {
+									yasss = user+":"+pass;
+								}else {
+									yasss = ","+user+":"+pass;
+								}
+								if(anonybox.readFile(db_path).equals("NOTHING")) {
+									y = user+":"+userIDs.get(user);
+								}else {
+									y = ","+user+":"+userIDs.get(user);
+								}
                                 anonybox.writeFile(user_path,anonybox.readFile(user_path).replaceAll(yasss,""));
+								anonybox.writeFile(db_path,anonybox.readFile(user_path).replaceAll(y,""));
                                 anonybox.write(DOS, "Done !", enckey, iv);
                             }else {
                                 anonybox.write(DOS, "You're not an admin", enckey, iv);
@@ -430,9 +455,18 @@ public class Server extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
-        public double gR(long min, long max){
-            long x = (long) ((Math.random() * ((max - min) + 1)) + min);
-            return x;
+        public BigInteger gR(){
+            BigInteger maxLimit = new BigInteger("99999999999");
+            BigInteger minLimit = new BigInteger("00000000000");
+            BigInteger bigInteger = maxLimit.subtract(minLimit);
+            Random randNum = new Random();
+            int len = maxLimit.bitLength();
+            BigInteger res = new BigInteger(len, randNum);
+            if (res.compareTo(minLimit) < 0)
+              res = res.add(minLimit);
+            if (res.compareTo(bigInteger) >= 0)
+              res = res.mod(bigInteger).add(minLimit);
+         return res;
         }
     }
     class Accept extends Thread {
