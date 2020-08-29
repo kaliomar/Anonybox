@@ -35,7 +35,7 @@ public class anonybox {
         }
     public static void writeData(String path, String text,String d) throws Exception {
                 if (!anonybox.readFile(path).equals("NOTHING")) text = d+text; 
-              FileWriter myWriter = new FileWriter(path,false);
+              FileWriter myWriter = new FileWriter("./DATA/"+path,false);
               myWriter.write(text);
               myWriter.close();
         }
