@@ -4,11 +4,11 @@ import java.net.Socket;
 import javax.swing.JOptionPane;
 public class Client extends javax.swing.JFrame {
     public Client() {
-        initComponents();
+        initComponents(); // Fire this up !
     }
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        ip_label = new javax.swing.JLabel();
+        ip_label = new javax.swing.JLabel(); // The swing stuff
         key_label = new javax.swing.JLabel();
         ip = new javax.swing.JTextField();
         key = new javax.swing.JTextField();
