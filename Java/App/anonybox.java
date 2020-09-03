@@ -35,7 +35,7 @@ public class anonybox {
         }
     public static void writeData(String path, String text,String d) throws Exception {
 		      FileWriter myWriter = null;
-              if (anonybox.readFile(path).equals("NOTHING")){ 
+              if (anonybox.readFile(path).equals("")){ 
 				myWriter = new FileWriter("./DATA/"+path,false);
 			  }else {
 				text = d+text; 
@@ -52,7 +52,7 @@ public class anonybox {
             out += sc.nextLine();
 		}
         if (out.isEmpty()) {
-			out = "NOTHING";
+			out = "";
 		}
 		System.out.println(out);
         return out;
@@ -76,7 +76,6 @@ public class anonybox {
         firewall FirewallWriteCheck = new firewall(text);
         text = FirewallWriteCheck.run();
         enc = AES.encrypt(text, key, iv);
-        System.out.println("[INFO] Outgoing: "+text);
         if (enc.length() > DATA_BUFFER_CONST) {
             while (i < (Math.round((double) enc.length() / DATA_BUFFER_CONST))) {
                 cut = enc.substring(0, DATA_BUFFER_CONST);
@@ -107,6 +106,7 @@ public class anonybox {
                 //TODO: Handle writeUTF
             }
         }
+        System.out.println("[INFO] Outgoing: "+text);
         try {
             s.flush();
         } catch (IOException e) {

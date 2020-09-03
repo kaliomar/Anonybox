@@ -25,42 +25,42 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="enckey_label" min="-2" pref="116" max="-2" attributes="0"/>
-                                  <Component id="user_label" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
-                                  <Component id="admin_label" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="enck" pref="116" max="32767" attributes="0"/>
-                                  <Component id="user" max="32767" attributes="0"/>
-                                  <Component id="admin" max="32767" attributes="0"/>
-                              </Group>
+                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="enckey_label" alignment="1" min="-2" pref="116" max="-2" attributes="0"/>
+                              <Component id="user_label" alignment="1" min="-2" pref="116" max="-2" attributes="0"/>
+                              <Component id="admin_label" alignment="1" min="-2" pref="116" max="-2" attributes="0"/>
+                              <Component id="admin_label1" alignment="1" min="-2" pref="116" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="admin_label1" min="-2" pref="116" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="db_file" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="enck" alignment="1" max="32767" attributes="0"/>
+                              <Component id="user" alignment="1" max="32767" attributes="0"/>
+                              <Component id="admin" alignment="1" max="32767" attributes="0"/>
+                              <Component id="db_file" alignment="1" min="-2" pref="116" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                      <Component id="start" min="-2" max="-2" attributes="0"/>
+                      <Component id="requirement" alignment="1" min="-2" pref="244" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="requirement" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
+                      <Component id="start" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="109" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="29" max="32767" attributes="0"/>
+              <EmptySpace pref="70" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="52" max="32767" attributes="0"/>
               <Component id="requirement" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -71,7 +71,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="user" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="user_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="start" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -83,7 +82,9 @@
                   <Component id="admin_label1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="db_file" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="110" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="start" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -109,21 +110,45 @@
     </Component>
     <Component class="javax.swing.JLabel" name="enckey_label">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Encryption Key *"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="user_label">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Users&apos; DB File *"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="admin_label">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Admins&apos; DB File *"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="requirement">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="All fields marked with &quot;*&quot; are required."/>
       </Properties>
     </Component>
@@ -137,6 +162,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="admin_label1">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="IDs&apos; DB File *"/>
       </Properties>
     </Component>

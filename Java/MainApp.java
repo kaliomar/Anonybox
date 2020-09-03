@@ -88,10 +88,12 @@ public class MainApp extends javax.swing.JFrame {
 
     private void clientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientBtnActionPerformed
         App.Server.main(new String[] { ("") });
+        System.out.println("Server Application Initiated");
     }//GEN-LAST:event_clientBtnActionPerformed
 
     private void serverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serverBtnActionPerformed
        App.Client.main(new String[] { ("") });
+        System.out.println("Client Application Initiated");
     }//GEN-LAST:event_serverBtnActionPerformed
 
     /**

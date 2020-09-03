@@ -1,14 +1,37 @@
 package App;
+
+import java.awt.Graphics;
+import java.awt.Image;
+
+import java.awt.Toolkit;
+
 import java.io.*;
+
 import java.math.*;
+
 import java.net.*;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.*;
+
+import javax.imageio.ImageIO;
+
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
 public class Server extends javax.swing.JFrame {
     private String user_path, admin_path, db_path;
+    // 
     public Server() {
+        try {
+        this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("./RES/ServerBkg.jfif")))));
+        }catch(Exception e) {
+            e.printStackTrace();
+            }
         initComponents();
         inin();
     }
@@ -16,8 +39,10 @@ public class Server extends javax.swing.JFrame {
         this.setTitle("Anonybox R Server");
         requirement.setText("<html>All fields marked with \"*\" are required.</html>");
     }
+
     @SuppressWarnings("unchecked")
     private void initComponents() {//GEN-BEGIN:initComponents
+
         enck = new javax.swing.JTextField();
         user = new javax.swing.JTextField();
         admin = new javax.swing.JTextField();
@@ -28,60 +53,83 @@ public class Server extends javax.swing.JFrame {
         start = new javax.swing.JButton();
         admin_label1 = new javax.swing.JLabel();
         db_file = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Anonybox R Server");
         setResizable(false);
+
         enck.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         enck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enckActionPerformed(evt);
             }
         });
+
         user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         admin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        enckey_label.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        enckey_label.setForeground(new java.awt.Color(255, 0, 0));
         enckey_label.setText("Encryption Key *");
+
+        user_label.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        user_label.setForeground(new java.awt.Color(255, 0, 0));
         user_label.setText("Users' DB File *");
+
+        admin_label.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        admin_label.setForeground(new java.awt.Color(255, 0, 0));
         admin_label.setText("Admins' DB File *");
+
+        requirement.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        requirement.setForeground(new java.awt.Color(255, 0, 0));
         requirement.setText("All fields marked with \"*\" are required.");
+
         start.setText("Start Server");
         start.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startActionPerformed(evt);
             }
         });
+
+        admin_label1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        admin_label1.setForeground(new java.awt.Color(255, 0, 0));
         admin_label1.setText("IDs' DB File *");
+
         db_file.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(enckey_label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(user_label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(admin_label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(admin_label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(enck, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(user, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(admin, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(db_file, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(35, 35, 35))
+                        .addComponent(requirement, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(enckey_label, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(user_label, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(admin_label, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(enck, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                                    .addComponent(user)
-                                    .addComponent(admin)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(admin_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(db_file)))
-                        .addGap(42, 42, 42)
-                        .addComponent(start))
-                    .addComponent(requirement, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addGap(97, 97, 97)
+                        .addComponent(start)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(52, Short.MAX_VALUE)
                 .addComponent(requirement)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -90,8 +138,7 @@ public class Server extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(user_label)
-                    .addComponent(start))
+                    .addComponent(user_label))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -100,8 +147,11 @@ public class Server extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(admin_label1)
                     .addComponent(db_file, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(start)
+                .addGap(26, 26, 26))
         );
+
         pack();
     }//GEN-END:initComponents
     String enckey = "";
@@ -115,13 +165,13 @@ public class Server extends javax.swing.JFrame {
         boolean userIsEmpty = user.getText().isEmpty();
         boolean adminIsEmpty = admin.getText().isEmpty();
         boolean idIsEmpty = db_file.getText().isEmpty();
-        if (!userIsEmpty&&!adminIsEmpty&&!idIsEmpty) {
+        if (!userIsEmpty && !adminIsEmpty && !idIsEmpty) {
             user_path = user.getText();
             admin_path = admin.getText();
             db_path = db_file.getText();
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "One of the arguments is missing");
-            }
+        }
         try {
             s = new ServerSocket(1111);
             a = new Accept(s, enckey);
@@ -208,67 +258,71 @@ public class Server extends javax.swing.JFrame {
     private javax.swing.JLabel user_label;
     // End of variables declaration//GEN-END:variables
     class ServerThread extends Thread {
-        public Socket s;
-        public String enckey;
+        private Socket s;
+        private String enckey;
+
         ServerThread(Socket s, String enckey) {
             //Constructor
             this.s = s;
             this.enckey = enckey;
         }
+
         @Override
         public void run() {
-            HashMap<String,String> userDB = new HashMap<String,String>();
-            HashMap<String,String> adminDB = new HashMap<String,String>();
-            HashMap<String,String> userIDs = new HashMap<String,String>();
-            boolean userRandom, adminRandom, userIsLogged, adminIsLogged,
-                userIsEntered, adminIsEntered;
+            HashMap<String, String> userDB = new HashMap<String, String>();
+            HashMap<String, String> adminDB = new HashMap<String, String>();
+            HashMap<String, String> userIDs = new HashMap<String, String>();
+            boolean userRandom, adminRandom, userIsLogged, adminIsLogged, userIsEntered, adminIsEntered;
             userIsLogged = false;
             adminIsLogged = false;
             userIsEntered = false;
             adminIsEntered = false;
             try {
                 String db_data = anonybox.readFile(db_path);
-				System.out.println(db_data);
-                userIDs = anonybox.TTHM(db_data,",",":");
-            if (user_path.contains("_RANDOM")) {
-                userRandom = true;
-                admin_path = user_path.replaceAll("_RANDOM", "");
-            } else {
-                userRandom = false;
-            }
-            if (admin_path.contains("_RANDOM")) {
-                adminRandom = false;
-                admin_path = admin_path.replaceAll("_RANDOM", "");
-            } else {
-                adminRandom = true;
-            }
-            if (!userRandom) {
-                try {
-                    String userCreds = anonybox.readFile(user_path);
-                    userDB = anonybox.TTHM(userCreds,",",":");
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                System.out.println(db_data);
+                userIDs = anonybox.TTHM(db_data, ",", ":");
+                if (user_path.contains("_RANDOM")) {
+                    userRandom = true;
+                    admin_path = user_path.replaceAll("_RANDOM", "");
+                } else {
+                    userRandom = false;
                 }
-            }else {
-                userDB.put(user_path,user_path);
+                if (admin_path.contains("_RANDOM")) {
+                    adminRandom = false;
+                    admin_path = admin_path.replaceAll("_RANDOM", "");
+                } else {
+                    adminRandom = true;
                 }
-            if (adminRandom) {
-                try {
-                    String adminCreds = anonybox.readFile(admin_path);
-                    adminDB = anonybox.TTHM(adminCreds,",",":");
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                if (!userRandom) {
+                    try {
+                        String userCreds = anonybox.readFile(user_path);
+                        userDB = anonybox.TTHM(userCreds, ",", ":");
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    userDB.put(user_path, user_path);
                 }
-            }else {
-                adminDB.put(admin_path,admin_path);
+                if (adminRandom) {
+                    try {
+                        String adminCreds = anonybox.readFile(admin_path);
+                        adminDB = anonybox.TTHM(adminCreds, ",", ":");
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    adminDB.put(admin_path, admin_path);
                 }
-            DataInputStream DIS = new DataInputStream(s.getInputStream());
-            DataOutputStream DOS = new DataOutputStream(s.getOutputStream());
-            String username = "";
-			        for (Map.Entry<String,String> entry : adminDB.entrySet())  
-            System.out.println("Key = " + entry.getKey() + 
-                             ", Value = " + entry.getValue()); 
-            byte[] iv = anonybox.EMPTY_IV;
+                DataInputStream DIS = new DataInputStream(s.getInputStream());
+                DataOutputStream DOS = new DataOutputStream(s.getOutputStream());
+                String username = "";
+                for (Map.Entry<String, String> entry : userIDs.entrySet())
+                    System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+                for (Map.Entry<String, String> entry : userDB.entrySet())
+                    System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+                for (Map.Entry<String, String> entry : adminDB.entrySet())
+                    System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+                byte[] iv = anonybox.EMPTY_IV;
                 while (true) {
                     String i = anonybox.read(DIS, enckey, iv);
                     if (i.equals("IVGENERATE")) {
@@ -276,20 +330,22 @@ public class Server extends javax.swing.JFrame {
                         DOS.writeInt(iv.length);
                         DOS.write(iv);
                     } else if (i.contains("mail")) {
-                            if (userIsLogged) {
-                                String ID = userIDs.get(username);
-                                String o = anonybox.readFile(ID + "-mail.txt");
-                                try {
-                                    anonybox.write(DOS, o, enckey, iv);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                    anonybox.write(DOS, "No mail is created", enckey, iv);
+                        if (userIsLogged) {
+                            String ID = userIDs.get(username);
+                            String o = anonybox.readFile(ID + "-mail.txt");
+                            if (o.equals("")) {
+                                o = "Nothing is here";
                                 }
-                            } else {
-                                anonybox.write(DOS, "You're not logged in", enckey, iv);
+                            try {
+                                anonybox.write(DOS, o, enckey, iv);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                anonybox.write(DOS, "No mail is created", enckey, iv);
                             }
+                        } else {
+                            anonybox.write(DOS, "You're not logged in", enckey, iv);
                         }
-                    else if (i.equals("TEST")) {
+                    } else if (i.equals("TEST")) {
                         anonybox.write(DOS, "DONE", enckey, iv);
                     } else if (i.equals("ENCERR")) {
                         DOS.writeUTF("IEK"); // Invalid Encryption Key
@@ -300,21 +356,19 @@ public class Server extends javax.swing.JFrame {
                             username = i.substring(5);
                             if (userDB.containsKey(username) || adminDB.containsKey(username)) {
                                 anonybox.write(DOS, "Username is entered", enckey, iv);
-								if (userDB.containsKey(username)) {
-									userIsEntered = true;
-								}else {
-									adminIsEntered = true;
-								}
+                                if (userDB.containsKey(username)) {
+                                    userIsEntered = true;
+                                } else {
+                                    adminIsEntered = true;
+                                }
+                            } else if (!userDB.containsKey(username) || !adminDB.containsKey(username)) {
+                                anonybox.write(DOS, "No username is found", enckey, iv);
                             }
-							else if (!userDB.containsKey(username) || !adminDB.containsKey(username))
-							{
-								anonybox.write(DOS, "No username is found", enckey, iv);
-							}
                         } else if (i.substring(0, 5).contains("pass") && userIsEntered ^ adminIsEntered) {
                             String pass = i.substring(5);
                             if (userIsEntered && userDB.get(username).equals(pass)) {
                                 anonybox.write(DOS, "Welcome " + username, enckey, iv);
-                                File f = new File("./DATA/"+userIDs.get(username) + "-mail.txt");
+                                File f = new File("./DATA/" + userIDs.get(username) + "-mail.txt");
                                 if (f.exists()) {
                                 } else {
                                     f.createNewFile();
@@ -342,31 +396,33 @@ public class Server extends javax.swing.JFrame {
                                     if (userDB.get(username).equals(oldpass)) {
                                         userDB.put(username, newpass);
                                         String tempdata = anonybox.readFile(user_path);
-                                        tempdata = tempdata.replaceAll(username + ":" + oldpass, username + ":" + newpass);
+                                        tempdata =
+                                            tempdata.replaceAll(username + ":" + oldpass, username + ":" + newpass);
                                         anonybox.writeFile(user_path, tempdata);
                                         userDB.put(username, newpass);
                                         anonybox.write(DOS, "Done", enckey, iv);
-                                    }else {
+                                    } else {
                                         anonybox.write(DOS, "Wrong old password", enckey, iv);
-                                        }
+                                    }
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                     anonybox.write(DOS, "No delimiter ','", enckey, iv);
                                 }
-                            }else if(adminIsLogged) {
+                            } else if (adminIsLogged) {
                                 try {
                                     String oldpass = i.substring(16, i.indexOf(","));
                                     String newpass = i.substring(i.indexOf(",") + 1);
                                     if (adminDB.get(username).equals(oldpass)) {
                                         adminDB.put(username, newpass);
                                         String tempdata = anonybox.readFile(admin_path);
-                                        tempdata = tempdata.replaceAll(username + ":" + oldpass, username + ":" + newpass);
+                                        tempdata =
+                                            tempdata.replaceAll(username + ":" + oldpass, username + ":" + newpass);
                                         anonybox.writeFile(admin_path, tempdata);
                                         adminDB.put(username, newpass);
                                         anonybox.write(DOS, "Done", enckey, iv);
-                                    }else {
+                                    } else {
                                         anonybox.write(DOS, "Wrong old password", enckey, iv);
-                                        }
+                                    }
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                     anonybox.write(DOS, "No delimiter ','", enckey, iv);
@@ -381,13 +437,14 @@ public class Server extends javax.swing.JFrame {
                                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
                                 LocalDateTime now = LocalDateTime.now();
                                 String line = "";
-								if(anonybox.readFile(userIDs.get(dest)+"-mail.txt").equals("NOTHING")) {
-									line = username + ":" + content + ":" + dtf.format(now);
-								}else {
-									line = ","+username + ":" + content + ":" + dtf.format(now);
-								}
+                                if (anonybox.readFile(userIDs.get(dest) + "-mail.txt").equals("")) {
+                                    line = username + ":" + content + ":" + dtf.format(now);
+                                } else {
+                                    line = "," + username + ":" + content + ":" + dtf.format(now);
+                                }
                                 try {
-                                    anonybox.writeData(userIDs.get(dest) + "-mail.txt", anonybox.readFile(userIDs.get(dest) + "-mail.txt")+line,",");
+                                    anonybox.writeData(userIDs.get(dest) + "-mail.txt",
+                                                       anonybox.readFile(userIDs.get(dest) + "-mail.txt") + line, ",");
                                     anonybox.write(DOS, "Done !", enckey, iv);
                                 } catch (Exception e) {
                                     e.printStackTrace();
@@ -396,66 +453,70 @@ public class Server extends javax.swing.JFrame {
                             } else {
                                 anonybox.write(DOS, "You're not logged in", enckey, iv);
                             }
-                        }else if(i.contains("change username")) {
-                            if(userIsLogged) {
+                        } else if (i.contains("change username")) {
+                            if (userIsLogged) {
                                 String olduser = i.substring(16, i.indexOf(","));
                                 String newuser = i.substring(i.indexOf(",") + 1);
-                                if(olduser.equals(username)) {
-                                    String PtbS =  userDB.get(username);
+                                if (olduser.equals(username)) {
+                                    String PtbS = userDB.get(username);
                                     username = newuser;
-                                    userDB.remove(olduser,PtbS);
+                                    userDB.remove(olduser, PtbS);
                                     userDB.put(newuser, PtbS);
-                                    anonybox.writeFile(user_path, anonybox.readFile(user_path).replaceAll(olduser+":"+PtbS, newuser+":"+PtbS));
-									anonybox.writeFile(db_path, anonybox.readFile(db_path).replaceAll(olduser,newuser));
+                                    anonybox.writeFile(user_path,
+                                                       anonybox.readFile(user_path)
+                                                       .replaceAll(olduser + ":" + PtbS, newuser + ":" + PtbS));
+                                    anonybox.writeFile(db_path,
+                                                       anonybox.readFile(db_path).replaceAll(olduser, newuser));
                                     anonybox.write(DOS, "Done", enckey, iv);
-                                }else {
+                                } else {
                                     anonybox.write(DOS, "Wrong old username", enckey, iv);
-                                    }
-                            }else {
-                                    anonybox.write(DOS, "You're not logged in", enckey, iv);
                                 }
-                            }else if(i.contains("create user")) {
-                            if(adminIsLogged) {
-                                String user = i.substring(12,i.indexOf(","));
-                                String pass = i.substring(i.indexOf(",")+1);
-                                userDB.put(user, pass);
-                                anonybox.writeData(user_path, user+":"+pass, ",");
-                                anonybox.writeData(db_path,user+":"+gR(),",");
-                                anonybox.write(DOS, "Done !", enckey, iv);
-                            }else {
-                                anonybox.write(DOS, "You're not an admin", enckey, iv);
-                                }
-                        }else if(i.contains("delete user")) {
-                            if(adminIsLogged) {
-                                String user = i.substring(12,i.indexOf(","));
-                                String pass = i.substring(i.indexOf(",")+1);
-                                String yasss = "";
-								String y = "";
-								if(anonybox.readFile(user_path).equals("NOTHING")) {
-									yasss = user+":"+pass;
-								}else {
-									yasss = ","+user+":"+pass;
-								}
-								if(anonybox.readFile(db_path).equals("NOTHING")) {
-									y = user+":"+userIDs.get(user);
-								}else {
-									y = ","+user+":"+userIDs.get(user);
-								}
-                                anonybox.writeFile(user_path,anonybox.readFile(user_path).replaceAll(yasss,""));
-								anonybox.writeFile(db_path,anonybox.readFile(user_path).replaceAll(y,""));
-                                anonybox.write(DOS, "Done !", enckey, iv);
-                            }else {
-                                anonybox.write(DOS, "You're not an admin", enckey, iv);
-                                }
+                            } else {
+                                anonybox.write(DOS, "You're not logged in", enckey, iv);
                             }
+                        } else if (i.contains("create user")) {
+                            if (adminIsLogged) {
+                                String user = i.substring(12, i.indexOf(","));
+                                String pass = i.substring(i.indexOf(",") + 1);
+                                userDB.put(user, pass);
+                                anonybox.writeData(user_path, user + ":" + pass, ",");
+                                anonybox.writeData(db_path, user + ":" + gR(), ",");
+                                anonybox.write(DOS, "Done !", enckey, iv);
+                            } else {
+                                anonybox.write(DOS, "You're not an admin", enckey, iv);
+                            }
+                        } else if (i.contains("delete user")) {
+                            if (adminIsLogged) {
+                                String user = i.substring(12, i.indexOf(","));
+                                String pass = i.substring(i.indexOf(",") + 1);
+                                String yasss = "";
+                                String y = "";
+                                if (anonybox.readFile(user_path).equals("")) {
+                                    yasss = user + ":" + pass;
+                                } else {
+                                    yasss = "," + user + ":" + pass;
+                                }
+                                if (anonybox.readFile(db_path).equals("")) {
+                                    y = user + ":" + userIDs.get(user);
+                                } else {
+                                    y = "," + user + ":" + userIDs.get(user);
+                                }
+                                anonybox.writeFile(user_path, anonybox.readFile(user_path).replaceAll(yasss, ""));
+                                anonybox.writeFile(db_path, anonybox.readFile(user_path).replaceAll(y, ""));
+                                anonybox.write(DOS, "Done !", enckey, iv);
+                            } else {
+                                anonybox.write(DOS, "You're not an admin", enckey, iv);
+                            }
+                        }
                     }
                 }
             } catch (Exception e) {
-				System.out.println("[CRITICAL] Error just happened");
+                System.out.println("[CRITICAL] Error just happened");
                 e.printStackTrace();
             }
         }
-        public BigInteger gR(){
+
+        public BigInteger gR() {
             BigInteger maxLimit = new BigInteger("99999999999");
             BigInteger minLimit = new BigInteger("00000000000");
             BigInteger bigInteger = maxLimit.subtract(minLimit);
@@ -463,32 +524,35 @@ public class Server extends javax.swing.JFrame {
             int len = maxLimit.bitLength();
             BigInteger res = new BigInteger(len, randNum);
             if (res.compareTo(minLimit) < 0)
-              res = res.add(minLimit);
+                res = res.add(minLimit);
             if (res.compareTo(bigInteger) >= 0)
-              res = res.mod(bigInteger).add(minLimit);
-         return res;
+                res = res.mod(bigInteger).add(minLimit);
+            return res;
         }
     }
+
     class Accept extends Thread {
-        public ServerSocket s;
-        public String enckey;
+        private ServerSocket s;
+        private String enckey;
+
         Accept(ServerSocket s, String enckey) {
             // Constructor
             this.s = s;
             this.enckey = enckey;
         }
+
         @Override
         public void run() {
             try {
                 System.out.println("[INFO] Started the server");
                 while (true) {
                     Socket c = s.accept(); //Accept User Connection
-                    System.out.println("[INFO] "+c.getInetAddress() + " is connected" + "\n"); // Log Client IP
+                    System.out.println("[INFO] " + c.getInetAddress() + " is connected" + "\n"); // Log Client IP
                     ServerThread st = new ServerThread(c, enckey); // ServerThread Class
                     st.start(); // Start the ServerThread
                 }
             } catch (Exception ee) {
-				System.out.println("[CRITICAL] Error just happened");
+                System.out.println("[CRITICAL] Error just happened");
                 ee.printStackTrace();
             }
         }
