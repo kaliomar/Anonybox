@@ -3,12 +3,11 @@ import java.io.*;
 import java.net.Socket;
 import javax.swing.JOptionPane;
 public class Client extends javax.swing.JFrame {
-    /** Creates new form main */
     public Client() {
         initComponents();
     }
     @SuppressWarnings("unchecked")
-    private void initComponents() {//GEN-BEGIN:initComponents
+    private void initComponents() {
         ip_label = new javax.swing.JLabel();
         key_label = new javax.swing.JLabel();
         ip = new javax.swing.JTextField();
@@ -87,14 +86,11 @@ public class Client extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pack();
-    }//GEN-END:initComponents
-    private void ipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ipActionPerformed
-    private void connectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectActionPerformed
+    }
+    private void connectActionPerformed(java.awt.event.ActionEvent evt) {
         connection c = new connection(ip.getText(),key.getText(),username.getText(),password.getText());
         c.start();
-    }//GEN-LAST:event_connectActionPerformed
+    }
     static class connection extends Thread {
         public String ip;
         public String key;
@@ -150,15 +146,7 @@ public class Client extends javax.swing.JFrame {
                 }
             }
         }
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing
                                                                    .UIManager
@@ -207,8 +195,6 @@ public class Client extends javax.swing.JFrame {
                          .Level
                          .SEVERE, null, ex);
         }
-        //</editor-fold>
-        /* Create and display the form */
         java.awt
             .EventQueue
             .invokeLater(new Runnable() {
@@ -217,7 +203,6 @@ public class Client extends javax.swing.JFrame {
                 }
             });
     }
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton connect;
     private javax.swing.JTextField ip;
     private javax.swing.JLabel ip_label;
@@ -227,6 +212,4 @@ public class Client extends javax.swing.JFrame {
     private javax.swing.JLabel password_label;
     private javax.swing.JTextField username;
     private javax.swing.JLabel username_label;
-    // End of variables declaration//GEN-END:variables
-
 }

@@ -1,31 +1,15 @@
 package App;
-
-import java.awt.Graphics;
-import java.awt.Image;
-
-import java.awt.Toolkit;
-
+import java.awt.*;
 import java.io.*;
-
 import java.math.*;
-
 import java.net.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import java.util.*;
-
 import javax.imageio.ImageIO;
-
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
+import javax.swing.*;
 public class Server extends javax.swing.JFrame {
     private String user_path, admin_path, db_path;
-    // 
     public Server() {
         try {
         this.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("./RES/ServerBkg.jfif")))));
@@ -39,10 +23,8 @@ public class Server extends javax.swing.JFrame {
         this.setTitle("Anonybox R Server");
         requirement.setText("<html>All fields marked with \"*\" are required.</html>");
     }
-
     @SuppressWarnings("unchecked")
-    private void initComponents() {//GEN-BEGIN:initComponents
-
+    private void initComponents() {
         enck = new javax.swing.JTextField();
         user = new javax.swing.JTextField();
         admin = new javax.swing.JTextField();
@@ -53,51 +35,39 @@ public class Server extends javax.swing.JFrame {
         start = new javax.swing.JButton();
         admin_label1 = new javax.swing.JLabel();
         db_file = new javax.swing.JTextField();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Anonybox R Server");
         setResizable(false);
-
         enck.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         enck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enckActionPerformed(evt);
             }
         });
-
         user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         admin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        enckey_label.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        enckey_label.setFont(new java.awt.Font("Tahoma", 1, 11));
         enckey_label.setForeground(new java.awt.Color(255, 0, 0));
         enckey_label.setText("Encryption Key *");
-
-        user_label.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        user_label.setFont(new java.awt.Font("Tahoma", 1, 11));
         user_label.setForeground(new java.awt.Color(255, 0, 0));
         user_label.setText("Users' DB File *");
-
-        admin_label.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        admin_label.setFont(new java.awt.Font("Tahoma", 1, 11));
         admin_label.setForeground(new java.awt.Color(255, 0, 0));
         admin_label.setText("Admins' DB File *");
-
-        requirement.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        requirement.setFont(new java.awt.Font("Tahoma", 1, 11));
         requirement.setForeground(new java.awt.Color(255, 0, 0));
         requirement.setText("All fields marked with \"*\" are required.");
-
         start.setText("Start Server");
         start.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startActionPerformed(evt);
             }
         });
-
-        admin_label1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        admin_label1.setFont(new java.awt.Font("Tahoma", 1, 11));
         admin_label1.setForeground(new java.awt.Color(255, 0, 0));
         admin_label1.setText("IDs' DB File *");
-
         db_file.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,14 +123,11 @@ public class Server extends javax.swing.JFrame {
         );
 
         pack();
-    }//GEN-END:initComponents
+    }
     String enckey = "";
     ServerSocket s = null;
     Accept a = new Accept(s, enckey);
-    private void enckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enckActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_enckActionPerformed
-    private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
+    private void startActionPerformed(java.awt.event.ActionEvent evt) {
         enckey = enck.getText();
         boolean userIsEmpty = user.getText().isEmpty();
         boolean adminIsEmpty = admin.getText().isEmpty();
@@ -180,13 +147,8 @@ public class Server extends javax.swing.JFrame {
             e.getStackTrace();
             JOptionPane.showMessageDialog(this, "The server cannot be started. Please check terminal log !");
         }
-    }//GEN-LAST:event_startActionPerformed
+    }
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing
                                                                    .UIManager
@@ -235,8 +197,6 @@ public class Server extends javax.swing.JFrame {
                          .Level
                          .SEVERE, null, ex);
         }
-        //</editor-fold>
-        /* Create and display the form */
         java.awt
             .EventQueue
             .invokeLater(new Runnable() {
@@ -245,7 +205,6 @@ public class Server extends javax.swing.JFrame {
                 }
             });
     }
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField admin;
     private javax.swing.JLabel admin_label;
     private javax.swing.JLabel admin_label1;
@@ -256,13 +215,11 @@ public class Server extends javax.swing.JFrame {
     private javax.swing.JButton start;
     private javax.swing.JTextField user;
     private javax.swing.JLabel user_label;
-    // End of variables declaration//GEN-END:variables
     class ServerThread extends Thread {
         private Socket s;
         private String enckey;
 
         ServerThread(Socket s, String enckey) {
-            //Constructor
             this.s = s;
             this.enckey = enckey;
         }
@@ -530,26 +487,22 @@ public class Server extends javax.swing.JFrame {
             return res;
         }
     }
-
     class Accept extends Thread {
         private ServerSocket s;
         private String enckey;
-
         Accept(ServerSocket s, String enckey) {
-            // Constructor
             this.s = s;
             this.enckey = enckey;
         }
-
         @Override
         public void run() {
             try {
                 System.out.println("[INFO] Started the server");
                 while (true) {
-                    Socket c = s.accept(); //Accept User Connection
-                    System.out.println("[INFO] " + c.getInetAddress() + " is connected" + "\n"); // Log Client IP
-                    ServerThread st = new ServerThread(c, enckey); // ServerThread Class
-                    st.start(); // Start the ServerThread
+                    Socket c = s.accept();
+                    System.out.println("[INFO] " + c.getInetAddress() + " is connected" + "\n");
+                    ServerThread st = new ServerThread(c, enckey);
+                    st.start();
                 }
             } catch (Exception ee) {
                 System.out.println("[CRITICAL] Error just happened");
