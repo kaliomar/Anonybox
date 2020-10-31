@@ -99,8 +99,8 @@ public class MainApp extends javax.swing.JFrame {
 		});
 	}
 
-	private javax.swing.JButton clientBtn;
-	private javax.swing.JLabel cp;
-	private javax.swing.JButton serverBtn;
-	private javax.swing.JLabel title;
+	public javax.swing.JButton clientBtn;
+	public javax.swing.JLabel cp;
+	public javax.swing.JButton serverBtn;
+	public javax.swing.JLabel title;
 }
