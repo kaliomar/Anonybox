@@ -22,6 +22,7 @@ AES256 CBC PKCS#5/7 with All-zeroed IV
 * Marawan Walid 🇪🇬
 * Omar Hany 🇪🇬
 * Aous Hossam Eldeen 🇸🇾 
+* Usama M. Elareeny 🇪🇬
 
 <p align="center">
 <img width="205" height="210" src="https://i.ya-webdesign.com/images/badge-transparent-communist-1.png">
