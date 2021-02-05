@@ -18,6 +18,7 @@ def encrypt(stingtoencrypt,secret):
 
     except:
         print('Error while encrypting')
+        return 404
 
 def decrypt(stingtodecrypt,secret):
     try:
@@ -26,7 +27,8 @@ def decrypt(stingtodecrypt,secret):
         b64 =b64decode(stingtodecrypt)
         cipher = AES.new(key.encode(), AES.MODE_CBC,  b'DaddayStalin4200')
         data = unpad(cipher.decrypt(b64), 16)
-        return data
+        return data.decode()
 
     except:
         print('Error while decrypting')
+        return 404
