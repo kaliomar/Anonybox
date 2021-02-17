@@ -1,5 +1,6 @@
 # Anonybox - Encrypted Mailbox [![GitHub stars](https://img.shields.io/github/stars/Praudyogikee/Anonybox)](https://github.com/Praudyogikee/Anonybox/stargazers) [![GitHub license](https://img.shields.io/github/license/Praudyogikee/Anonybox)](https://github.com/Praudyogikee/Anonybox/blob/master/LICENSE) ![GitHub repo size](https://img.shields.io/github/repo-size/Praudyogikee/Anonybox) ![Lines of code](https://img.shields.io/tokei/lines/github/Praudyogikee/Anonybox)
 Anonybox is an open source encrypted mailbox made in java.
+
 ## Features
 - Diffie-Hellman Key Exchange Algorithm is used to exchange encryption keys
 - Specific Encryption Key for server files
@@ -18,7 +19,7 @@ You can:
 1. Edit PublicServers.txt
 2. Contact praudyogikee[dot]atdo[at]gmail[dot]com
 
-## Build & Run
+## Build and Run
 "You can view Test.mkv if you have any issues"<br>
 ###### For Server
 `javac main.java && sudo java main [Arguments]`
