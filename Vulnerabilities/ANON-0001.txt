@@ -1,5 +1,0 @@
-Name: Black list bypassing
-Version[s] affected: Python
-Researcher's name: Khaled Nassar
-Short Description: Bypassing Black list using port-rotating
-Full Description: Black list stores IP Address and port number. KNassar Used port-rotating to change the port so OldLog!=NewLog.

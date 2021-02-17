@@ -1,1 +1,0 @@
-adminnm:adminpass,admin2nm:admin2pass
