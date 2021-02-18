@@ -25,7 +25,6 @@ public class main {
 		Scanner s = new Scanner(System.in);
 		if(args.length%2>0 &&args[0].equals("-h")) {
 			System.out.println(R+"Help Screen\n"
-					+ "-p [Number]   Port number \"Default is 1000\"\n"
 					+ "-U [String]   User Data File \"Default is User.txt\"\n"
 					+ "-d [String]   Data Directory \"Default is data/\"\n"
 					+ "-v [1/0]      Enable/Disable Verbose \"Default is disabled\""
