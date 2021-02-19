@@ -233,7 +233,7 @@ public class U {
 	            key = myKey.getBytes("UTF-8");
 	            sha = MessageDigest.getInstance("SHA-1");
 	            key = sha.digest(key);
-	            key = Arrays.copyOf(key, 16); 
+	            key = Arrays.copyOf(key, 32); 
 	            secretKey = new SecretKeySpec(key, "AES");
 	        } 
 	        catch (NoSuchAlgorithmException e) {
