@@ -77,7 +77,7 @@ Yes, but under certain conditions:
 - Do not republish before contacting Praudyogikee "You can fork and edit only"
 
 ## Team
-- Morad Abdelrasheed Mokhtar Ali (Founder)
+- Morad Abdelrasheed Mokhtar Ali (Java Developer)
 - Omar Yehia (Android developer)
 - Pavly O. Halim (Developer)
 - Mustafa Anwar (Encryption Developer)
