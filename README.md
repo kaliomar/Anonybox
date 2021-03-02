@@ -77,10 +77,21 @@ Yes, but under certain conditions:
 - Do not republish before contacting Praudyogikee "You can fork and edit only"
 
 ## Team
-- Morad Abdelrasheed Mokhtar Ali (Founder)
+- Morad Abdelrasheed Mokhtar Ali (Java Developer)
 - Omar Yehia (Android developer)
 - Pavly O. Halim (Developer)
 - Mustafa Anwar (Encryption Developer)
 
 ## Contributers
 - Isla Mukheef (Python developer)
+
+
+## FAQ
+### Signal or Anonybox?
+Both use AES256 for encryption, the only difference here is that signal is centralized, Anonybox is not. Anonybox can run on offline networks. Anonybox is pretty simple but does the job.
+
+### Is anonybox legal to use?
+Seek the law inside your country. However, It's known that Egypt,China,North Korea, United Arab Emirates,Iran, and Russia ban similar services.
+
+### What's the main goal for Anonybox?
+Providing Secure Connections and support freedom and privacy.
