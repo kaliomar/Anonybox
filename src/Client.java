@@ -50,6 +50,9 @@ public class Client {
 			c.setPort(1000);
 			c.init();
 		}
+		else {
+			System.out.print("Err\n");
+		}
 		}
 	}
 	public Socket s;
@@ -84,7 +87,7 @@ public class Client {
 		this.port = p;
 	}
 	public 	String registerUser(String username,String password) {
-		String succ = "";
+		String succ = "Error";
 		try {
 			U.net.write(DOS, "register", secret);
 			if(U.net.read(DIS, secret).equals("RMA")) {
@@ -105,7 +108,7 @@ public class Client {
 		return succ;
 	}
 	public String sendEmail(String SrcUser,String destUser,String destIP, String Subj, String Cont) {
-		String succ = "";
+		String succ = "Error";
 		try {
 			U.net.write(DOS, "notify "+destUser+","+destIP+","+Subj, secret);
 			if(U.net.read(DIS, secret).equals("OK")) {
@@ -134,7 +137,7 @@ public class Client {
 		return succ;
 	}
 	public String mail() {
-		String f = "";
+		String f = "Error";
 		String succ = "";
 		try {
 		U.net.write(DOS,"mail" , secret);
@@ -150,7 +153,7 @@ public class Client {
 		return f;
 	}
 	public String chgpwd(String op, String np) {
-		String succ = "";
+		String succ = "Error";
 		try {
 			U.net.write(DOS, "chg pwd "+op+","+np, secret);
 			String res = U.net.read(DIS, secret);
@@ -167,7 +170,7 @@ public class Client {
 		return succ;
 	}
 	public String Login(String username, String password) {
-		String succ = "";
+		String succ = "Error";
 		try {
 			U.net.write(DOS, "login", secret);
 			if(U.net.read(DIS, secret).equals("LMA")) {
@@ -199,6 +202,7 @@ public class Client {
 				DOS.writeUTF(U.AES.encrypt("ok", secret, U.iv));
 				System.out.println(R+"Secure Connection is established"+RE);
 			}else {
+				System.out.println(R+"Secure Connection isn't established"+RE);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

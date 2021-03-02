@@ -1,7 +1,20 @@
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.AbstractAction;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -10,12 +23,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
-public class main {
+import javax.swing.Action;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+import javax.swing.DropMode;
+import javax.swing.JTextArea;
+
+public class ServerGUI {
 	static int                     port = 1000; // Default Port Number
 	static int                     MAX_CONS = 100; // Max Connections
 	static int                     c = 0; // Current Connections
-	public static final String     RE = "\u001B[0m"; // Reset Terminal Color
-	public static final String     R = "\u001B[31m"; // Red Terminal Color
+	public static final String     RE = ""; // Reset Terminal Color
+	public static final String     R = ""; // Red Terminal Color
 	static HashMap<String, String> UD = new HashMap<String,String>(); // User Credentials K: Username V: Password
 	static HashMap<String, String> N = new HashMap<String, String>(); // Send External Mail
 	static ArrayList<String>       BIP = new ArrayList<String>(); // Banned IP Addresses
@@ -25,6 +44,52 @@ public class main {
 	static String                  DataDir = "data/"; // Data folder
 	static String                  SKf = "Server.key"; // Server Key filename
 	static boolean                 v = false; // Verbose Mode
+	private JFrame                 frmAnonyboxServer;
+	private JTextField             textField;
+	private JLabel                 State = new JLabel("State: Stopped");
+	private JTextArea              Log = new JTextArea();
+	private JTextArea              Terminal = new JTextArea();
+	public class CustomOutputStream extends OutputStream {
+	    private JTextArea textArea;    
+	    public CustomOutputStream(JTextArea textArea) {
+	        this.textArea = textArea;
+	    }
+	     
+	    @Override
+	    public void write(int b) throws IOException {
+	        textArea.append(String.valueOf((char)b));
+	        textArea.setCaretPosition(textArea.getDocument().getLength());
+	    }
+	}
+	static void CMDArgSet(String[] args) {
+		try {
+			HashMap<String,String> Args = new HashMap<String,String>();
+			for(int i = 0;i<args.length;i+=2) {
+				Args.put(args[i], args[i+1]);
+			}
+			if(Args.containsKey("-U")) {
+				UserFilePath = Args.get("-U");
+			}
+			if(Args.containsKey("-d")) {
+				DataDir = Args.get("-d");
+			}
+			if(Args.containsKey("-v")) {
+				int vMode = Integer.parseInt(Args.get("-v"));
+				if(vMode<=0) {
+					v = false;
+				}else {
+					v = true;
+				}
+			}
+			if(Args.containsKey("-mxc")) {
+				int Mxc = Integer.parseInt(Args.get("-mxc"));
+				MAX_CONS = Mxc;
+			}
+		}catch(Exception e) {
+			System.out.println("Something wrong happened with the CMD Arguments.");
+			e.printStackTrace();
+		}
+	}
 	public static boolean ALF(ArrayList<String> bIP2, Object toFind) {
 		boolean state = false;
 		for(int ii = 0;ii<BIP.size();ii++) {
@@ -86,37 +151,129 @@ public class main {
 						e.printStackTrace();
 					}
 				}
-				// Start the server
 				s.close();
-				try {
-				ServerSocket ss = new ServerSocket(port);
-				while(true) {
-					if(c<MAX_CONS) {
-					Socket p = ss.accept();
-					if(v) System.out.println(R+p.getInetAddress().getHostAddress().replace("/","")+" is connected");
-					if(!ALF(BIP,p.getInetAddress().getHostAddress().replace("/",""))) {
-						if(!ALF(CIP,p.getInetAddress().getHostAddress().replace("/",""))) {
-							t thread = new t(p);
-							thread.start();
-							c++;
-							CIP.add(p.getInetAddress().getHostAddress().replace("/",""));
-						}else {
-							new DataOutputStream(p.getOutputStream()).writeUTF("Already Connected");
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							ServerGUI window = new ServerGUI();
+							window.frmAnonyboxServer.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
-					}else {
-						new DataOutputStream(p.getOutputStream()).writeUTF("Banned");
 					}
-					}else {
-						// Do nothing
-					}
-				}
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
+				});
 			}else {
 				System.out.println(R+"Incorrect Server Key"+RE);
 			}
+			}
+	}
+	public ServerGUI() {
+		initialize();
+	}
+	public  class T extends Thread {
+		public void run() {
+ 			try {
+ 			PrintStream printStream = new PrintStream(new CustomOutputStream(Log));
+ 			System.setOut(printStream);
+ 			ServerSocket ss = new ServerSocket(port);
+ 			System.out.println("Server has started");
+ 			while(true) {
+ 				if(c<MAX_CONS) {
+ 				Socket p = ss.accept();
+ 				if(v) System.out.println(R+p.getInetAddress().getHostAddress().replace("/","")+" is connected");
+ 				if(!ALF(BIP,p.getInetAddress().getHostAddress().replace("/",""))) {
+ 					if(!ALF(CIP,p.getInetAddress().getHostAddress().replace("/",""))) {
+ 						t thread = new t(p);
+ 						thread.start();
+ 						c++;
+ 						CIP.add(p.getInetAddress().getHostAddress().replace("/",""));
+ 					}else {
+ 						new DataOutputStream(p.getOutputStream()).writeUTF("Already Connected");
+ 					}
+ 				}else {
+ 					new DataOutputStream(p.getOutputStream()).writeUTF("Banned");
+ 				}
+ 				}else {
+ 					// Do nothing
+ 				}
+ 			}
+ 			}catch(Exception ee) {
+ 				ee.printStackTrace();
+ 			}
 		}
+	}
+	private void initialize() {
+		frmAnonyboxServer = new JFrame();
+		frmAnonyboxServer.setTitle("Anonybox Server");
+		frmAnonyboxServer.setBounds(100, 100, 550, 300);
+		frmAnonyboxServer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAnonyboxServer.getContentPane().setLayout(null);
+		textField = new JTextField();
+		textField.setBackground(Color.DARK_GRAY);
+		textField.setForeground(Color.GREEN);
+		textField.setBounds(12, 232, 159, 19);
+		textField.addKeyListener(new KeyAdapter() {
+	        @Override
+	        public void keyPressed(KeyEvent e) {
+	            if(e.getKeyCode() == KeyEvent.VK_ENTER){
+			        String in = textField.getText();
+			        if(in.equals("show connected")) {
+			        	Terminal.setText(CIP.toString());
+			        }
+			        else if(in.equals("help")) {
+			        	Terminal.setText("Anonybox Terminal\n"
+								+ "show connected | Show Connected Users\n"
+								+ "show banned | Show Banned Users\n"
+								+ "show ram | Show RAM Usage\n"
+								+ "show users | show users and creds\n");	
+			        }
+			        else if(in.equals("show banned")) {
+			        	Terminal.setText(BIP.toString());
+			        }
+			        else if(in.equals("show ram")) {
+			        	Terminal.setText((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())/1000000+" MB");
+			        }
+			        else if(in.equals("show users")) {
+			        	Terminal.setText(UD.toString());
+			        }
+			        textField.setText("");
+			        textField.grabFocus();
+			        textField.requestFocus();
+	            }
+	        }
+
+	    });		
+		frmAnonyboxServer.getContentPane().add(textField);
+		textField.setColumns(10);
+		JButton B = new JButton("Start Server");
+		ActionListener actionListener = new ActionListener() {
+	         public void actionPerformed(ActionEvent event) {
+	        	 State.setText("State: Running");
+	        	 T o = new T();
+	        	 o.start();
+	         }
+	      };
+		B.addActionListener(actionListener);
+		B.setBounds(235, 0, 159, 25);
+		frmAnonyboxServer.getContentPane().add(B);
+		State.setBounds(12, 5, 205, 15);
+		frmAnonyboxServer.getContentPane().add(State);
+		Terminal.setLineWrap(true);
+		Terminal.setEditable(false);
+		Terminal.setText("Anonybox Terminal\n"
+				+ "show connected | Show Connected Users\n"
+				+ "show banned | Show Banned Users\n"
+				+ "show ram | Show RAM Usage\n"
+				+ "show users | show users and creds\n");
+		Terminal.setBackground(Color.BLACK);
+		Terminal.setForeground(Color.GREEN);
+		Terminal.setBounds(12, 32, 159, 219);
+		frmAnonyboxServer.getContentPane().add(Terminal);
+		Log.setEditable(false);
+		Log.setBackground(Color.BLACK);
+		Log.setForeground(Color.GREEN);
+		Log.setBounds(183, 32, 355, 219);
+		frmAnonyboxServer.getContentPane().add(Log);
 	}
 	public static class t extends Thread {
 		public Socket tt;
@@ -256,6 +413,8 @@ public class main {
 						if(U.AES.decrypt(DiS.readUTF(), secret, U.iv).equals("test")) {
 							DoS.writeUTF(U.AES.encrypt("ok", secret, U.iv));
 							if(v) System.out.println(R+"Secure Connection is established"+RE);
+						}else {
+							if(v) System.out.println(R+"Secure Connection isn't established"+RE);
 						}
 						U.net.write(DoS, "verify "+arg[0]+","+arg[1]+","+arg[3], secret);
 						String res = U.net.read(DiS, secret);
@@ -348,33 +507,5 @@ public class main {
 			}
 		}
 	}
-	static void CMDArgSet(String[] args) {
-		try {
-			HashMap<String,String> Args = new HashMap<String,String>();
-			for(int i = 0;i<args.length;i+=2) {
-				Args.put(args[i], args[i+1]);
-			}
-			if(Args.containsKey("-U")) {
-				UserFilePath = Args.get("-U");
-			}
-			if(Args.containsKey("-d")) {
-				DataDir = Args.get("-d");
-			}
-			if(Args.containsKey("-v")) {
-				int vMode = Integer.parseInt(Args.get("-v"));
-				if(vMode<=0) {
-					v = false;
-				}else {
-					v = true;
-				}
-			}
-			if(Args.containsKey("-mxc")) {
-				int Mxc = Integer.parseInt(Args.get("-mxc"));
-				MAX_CONS = Mxc;
-			}
-		}catch(Exception e) {
-			System.out.println("Something wrong happened with the CMD Arguments.");
-			e.printStackTrace();
-		}
-	}
+
 }
