@@ -1,10 +1,12 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 public class Client {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnknownHostException {
 		Client c = new Client("",0);
 		while(true) {
 		System.out.println("Menu: \n"
@@ -45,8 +47,9 @@ public class Client {
 		}
 		else if(o == 6) {
 			System.out.print("Enter the IP Address Ex. 192.168.1.6\n");
-			String[] UP = s.nextLine().split(",");
-			c.setIP(UP[0]);
+			String in = s.nextLine();
+			InetAddress addr = InetAddress.getByName(in); 
+			c.setIP(addr.getHostAddress());
 			c.setPort(1000);
 			c.init();
 		}
