@@ -1,10 +1,12 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 public class Client {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnknownHostException {
 		Client c = new Client("",0);
 		while(true) {
 		System.out.println("Menu: \n"
@@ -13,7 +15,8 @@ public class Client {
 				+ "3. Change Password\n"
 				+ "4. Mail\n"
 				+ "5. Send External Mail\n"
-				+ "6. Connect\n"
+				+ "6. Connect \"Direct\"\n"
+				+ "8. Connect \"Via Rotator\"\n"
 				+ "7. Exit\n");
 		Scanner s = new Scanner(System.in);
 		int o = Integer.parseInt(s.nextLine());
@@ -45,10 +48,19 @@ public class Client {
 		}
 		else if(o == 6) {
 			System.out.print("Enter the IP Address Ex. 192.168.1.6\n");
-			String[] UP = s.nextLine().split(",");
-			c.setIP(UP[0]);
+			String in = s.nextLine();
+			InetAddress addr = InetAddress.getByName(in); 
+			c.setIP(addr.getHostAddress());
 			c.setPort(1000);
 			c.init();
+		}
+		else if(o == 8) {
+			System.out.print("Enter the rotator IP Address Ex. 192.168.1.6\n");	
+			String in = s.nextLine();
+			InetAddress addr = InetAddress.getByName(in); 
+			c.setIP(addr.getHostAddress());
+			c.setPort(2000);
+			c.iinit();
 		}
 		else {
 			System.out.print("Err\n");
@@ -113,7 +125,11 @@ public class Client {
 			U.net.write(DOS, "notify "+destUser+","+destIP+","+Subj, secret);
 			if(U.net.read(DIS, secret).equals("OK")) {
 				System.out.println("P");
+				if(!destIP.equals(ip)) {
 				Socket s = new Socket(destIP,1000);
+				}else {
+				Socket s = new Socket(destIP,2000);
+				}
 				System.out.println("P");
 				DataInputStream DiS = new DataInputStream(s.getInputStream());
 				DataOutputStream DoS = new DataOutputStream(s.getOutputStream());
@@ -208,7 +224,31 @@ public class Client {
 			e.printStackTrace();
 		}
 	}
-	public String DH(DataInputStream DIS, DataOutputStream DOS) {
+	public void iinit() {
+		try {
+		s = new Socket(ip,port);
+		DIS = new DataInputStream(s.getInputStream());
+		DOS = new DataOutputStream(s.getOutputStream());
+		secret = DH(DIS,DOS);
+		if(U.AES.decrypt(DIS.readUTF(), secret, U.iv).equals("test")) {
+			DOS.writeUTF(U.AES.encrypt("ok", secret, U.iv));
+			System.out.println(R+"Secure Connection is established"+RE);
+		}else {
+			System.out.println(R+"Secure Connection isn't established"+RE);
+		}
+		Scanner o = new Scanner(System.in);
+		System.out.println("Enter the server ip");
+		String oo = o.nextLine();
+		InetAddress addr = InetAddress.getByName(oo);
+		DOS.writeUTF(U.AES.encrypt("set "+addr.getHostAddress()+":1000", secret, U.iv));
+		if(U.AES.decrypt(DIS.readUTF(), secret, U.iv).equals("ok")) {
+			
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public static String DH(DataInputStream DIS, DataOutputStream DOS) {
 		String out = "";
 		try {
 			for(int i = 0;i<8;i++) {

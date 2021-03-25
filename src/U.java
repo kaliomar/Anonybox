@@ -71,6 +71,7 @@ public class U {
 	}
 	public static class net {
 		public static void write(DataOutputStream s,String text,String key) {
+			System.out.println("Sent: "+text);
 			try {
 				double buf = 2D;
 				if(text.length() > 2) {
@@ -114,7 +115,7 @@ public class U {
 					trig = 0;
 				}
 			}
-				//System.out.println("RCVD: "+out);
+				System.out.println("RCVD: "+out);
 			return out;
 		}
 		public static String dh(DataInputStream DIS,DataOutputStream DOS) {
